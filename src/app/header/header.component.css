@@ -1,0 +1,22 @@
+img{
+  margin-left: 20%;
+  float: left;
+}
+
+.utente_loggato{
+  float:right;
+  margin-right: 20%;
+}
+
+p{
+  margin-bottom: 5px;
+}
+
+.nome{
+  font-weight: bold;
+}
+
+header{
+  float: none;
+  overflow: auto;
+}

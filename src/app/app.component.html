@@ -1,4 +1,7 @@
 <div>
+  <app-header></app-header>
+</div>
+<div>
   <div [ngSwitch]="pagina">
     <!-- eseguo lo switch case sulla variabile pagina (stringa) che mi identifica in ogni momento cosa devo visualizzare -->
     <div *ngSwitchCase="'login'"> <app-login (nuovaPagina)="getPagina($event)"></app-login> </div>

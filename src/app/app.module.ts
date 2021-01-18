@@ -10,6 +10,7 @@ import { HomeComponent } from './sindaco/home/home.component';
 import { NuovoEventoComponent } from './sindaco/nuovo-evento/nuovo-evento.component';
 import { MioComuneComponent } from './sindaco/mio-comune/mio-comune.component';
 import { IscrizioniComponent } from './sindaco/iscrizioni/iscrizioni.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { IscrizioniComponent } from './sindaco/iscrizioni/iscrizioni.component';
     NuovoEventoComponent,
     MioComuneComponent,
     IscrizioniComponent,
+    HeaderComponent,
 
   ],
     imports: [
