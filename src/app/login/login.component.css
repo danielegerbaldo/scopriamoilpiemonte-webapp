@@ -1,0 +1,40 @@
+.superDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.platform{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.facebook{
+  background-color: #3b5998;
+  color: white;
+}
+
+.erroreAccesso{
+  color: red;
+}
+
+.registrati{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn{
+  width: 200px;
+  font-weight: bold;
+  border-radius: 10px;
+}
