@@ -1,11 +1,11 @@
 img{
-  margin-left: 20%;
+  margin-left: 10%;
   float: left;
 }
 
 .utente_loggato{
   float:right;
-  margin-right: 20%;
+  margin-right: 10%;
 }
 
 p{
@@ -19,4 +19,10 @@ p{
 header{
   float: none;
   overflow: auto;
+}
+
+h1{
+  width: 55%;
+  float: left;
+  margin-left: 30px;
 }
