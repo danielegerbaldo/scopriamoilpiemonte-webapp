@@ -1,0 +1,22 @@
+nav{
+  background-color: blue;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+}
+
+nav *{
+  color:black;
+}
+
+li{
+  border-width: 0px;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  border-color: black;
+  border-style: solid;
+}
+
+li:hover{
+  background-color: lightskyblue;
+}
