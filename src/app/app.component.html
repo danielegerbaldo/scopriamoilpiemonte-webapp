@@ -1,13 +1,13 @@
 <div>
-  <app-header></app-header>
+  <app-header [statoLogin]="statoLogin" (loginEmitter)="modificaStatoLogin($event)"></app-header>
 </div>
 <div>
-  <div [ngSwitch]="pagina">
+  <div [ngSwitch]="statoLogin">
     <!-- eseguo lo switch case sulla variabile pagina (stringa) che mi identifica in ogni momento cosa devo visualizzare -->
-    <div *ngSwitchCase="'login'"> <app-login (nuovaPagina)="getPagina($event)"></app-login> </div>
-    <div *ngSwitchCase="'registrati'"> <app-registrati (nuovaPagina)="getPagina($event)"></app-registrati> </div>
-    <div *ngSwitchCase="'sindaco-home'"> <app-home></app-home> </div>
+    <div *ngSwitchCase="StatoLogin.ospite"> <h1> Sono un ospite </h1> </div>
+    <div *ngSwitchCase="StatoLogin.registrazione"> <app-registrati (nuovaPagina)="getPagina($event)"></app-registrati> </div>
+    <div *ngSwitchCase="StatoLogin.accesso"> <app-login (nuovaPagina)="getPagina($event)"></app-login> </div>
+    <div *ngSwitchCase="StatoLogin.effettuato"> <app-home></app-home> </div>
   </div>
-  {{pagina}}
 </div>
 

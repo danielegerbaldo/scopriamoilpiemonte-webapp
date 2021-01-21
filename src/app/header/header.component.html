@@ -1,10 +1,29 @@
 <header>
   <img src="assets/piemonte.png" alt="logo Piemonte" width="50" height="50">
   <h1>Scopriamo il Piemonte</h1>
-  <!-- qui ci sarà un ngif che distingue l'utente loggato da un guest -->
-  <div class="utente_loggato">
-    <!-- aggiungere un'immagine -->
-    <p class="nome"> nome utente </p>
-    <p class="ruolo"> ruolo </p>
+  <div [ngSwitch]="statoLogin">
+    <div *ngSwitchCase="StatoLogin.ospite">
+      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.accesso)">Accedi</button>
+      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.registrazione)">Registrati</button>
+    </div>
+    <div *ngSwitchCase="StatoLogin.registrazione">
+      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.accesso)">Accedi</button>
+    </div>
+    <div *ngSwitchCase="StatoLogin.accesso">
+      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.registrazione)">Registrati</button>
+    </div>
+    <div *ngSwitchCase="StatoLogin.effettuato">
+      <div class="utente_loggato">
+        <!-- aggiungere un'immagine -->
+        <div>
+          <p class="nome"> nome utente </p>
+          <p class="ruolo"> ruolo </p>
+        </div>
+        <div>
+          <button class="btn logout" (click)="changeLoginStatus(StatoLogin.ospite)">Esci</button>
+        </div>
+      </div>
+      
+    </div>
   </div>
 </header>
