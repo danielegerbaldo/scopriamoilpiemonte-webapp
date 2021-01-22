@@ -1,4 +1,4 @@
-<header>
+<header class="d-flex flex-row justify-content-around align-items-center">
   <img src="assets/piemonte.png" alt="logo Piemonte" width="50" height="50">
   <h1>Scopriamo il Piemonte</h1>
   <div [ngSwitch]="statoLogin">
@@ -23,7 +23,6 @@
           <button class="btn logout" (click)="changeLoginStatus(StatoLogin.ospite)">Esci</button>
         </div>
       </div>
-      
     </div>
   </div>
 </header>
