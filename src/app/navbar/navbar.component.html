@@ -1,8 +1,11 @@
 <nav class="navbar navbar-default navbar-expand-md p-0">
   <ul class="nav navbar-nav nav-fill w-100">
-    <li class="nav-item"><button class="btn">Home</button></li>
+    <!-- <li class="nav-item"><button class="btn">Home</button></li>
     <li class="nav-item"><button class="btn">Page 1</button></li>
     <li class="nav-item"><button class="btn">Page 2</button></li>
-    <li class="nav-item"><button class="btn">Page 3</button></li>
+    <li class="nav-item"><button class="btn">Page 3</button></li> -->
+    <li *ngFor="let el of elementi"class="nav-item">
+      <button class="btn">{{el}}</button>
+    </li>
   </ul>
 </nav>

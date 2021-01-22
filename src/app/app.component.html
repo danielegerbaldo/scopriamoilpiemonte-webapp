@@ -2,7 +2,9 @@
   <app-header [statoLogin]="statoLogin" (loginEmitter)="modificaStatoLogin($event)"></app-header>
 </div>
 <div>
-  <app-navbar *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato"></app-navbar>
+  <app-navbar 
+    *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato"
+    [ruoloUtente]="utente.ruolo"></app-navbar>
 </div>
 <div>
   <div [ngSwitch]="statoLogin">

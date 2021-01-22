@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 
-import {StatoLogin} from "../models/enums.model"
+import {StatoLogin, Ruolo} from "../models/enums.model";
+import {Utente} from "../models/data.model";
+
+// Test statico
+import * as utenteSindaco from '../jsonTest/sindaco.json';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +14,19 @@ import {StatoLogin} from "../models/enums.model"
 export class AppComponent {
   title = 'Scopriamo il Piemonte';
   StatoLogin = StatoLogin;
-  statoLogin = StatoLogin.effettuato;
-  //con @input dichiaro che questa variabile può essere modificata da una variabile esterna
-  @Input() pagina: string = 'login';
+  statoLogin = StatoLogin.ospite;
+  utente: Utente = {"nome": "", "ruolo":Ruolo.base, "comune": ""};
 
-  getPagina(event){
-    this.pagina = event;
+  constructor(){
+    // Carico i dati statici dal mio json
+    var tmp = (utenteSindaco as any).default;
+    this.utente.comune = tmp.comune;
+    this.utente.nome = tmp.nome;
+    this.utente.ruolo = Ruolo[tmp.ruolo as keyof typeof Ruolo];
+  }
+
+  ngOnInit(){
+    console.log(this.utente);
   }
 
   modificaStatoLogin(s: StatoLogin){

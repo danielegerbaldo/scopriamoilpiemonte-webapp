@@ -4,3 +4,9 @@ export enum StatoLogin{
   accesso,
   effettuato
 }
+
+export enum Ruolo{
+  base,
+  collaboratore,
+  sindaco
+}
