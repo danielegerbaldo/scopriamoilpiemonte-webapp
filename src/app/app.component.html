@@ -8,10 +8,17 @@
 </div>
 <div>
   <div [ngSwitch]="statoLogin">
-    <!-- eseguo lo switch case sulla variabile pagina (stringa) che mi identifica in ogni momento cosa devo visualizzare -->
-    <div *ngSwitchCase="StatoLogin.ospite"> <h1> Sono un ospite </h1> </div>
-    <div *ngSwitchCase="StatoLogin.registrazione"> <app-registrati (nuovaPagina)="getPagina($event)"></app-registrati> </div>
-    <div *ngSwitchCase="StatoLogin.accesso"> <app-login (nuovaPagina)="getPagina($event)"></app-login> </div>
-    <div *ngSwitchCase="StatoLogin.effettuato"> <app-home></app-home> </div>
+    <div *ngSwitchCase="StatoLogin.ospite">
+       <app-main-page></app-main-page> 
+    </div>
+    <div *ngSwitchCase="StatoLogin.registrazione"> 
+      <app-registrati (nuovaPagina)="getPagina($event)"></app-registrati> 
+    </div>
+    <div *ngSwitchCase="StatoLogin.accesso"> 
+      <app-login (nuovaPagina)="getPagina($event)"></app-login> 
+    </div>
+    <div *ngSwitchCase="StatoLogin.effettuato" class="w-100"> 
+      <app-main-page></app-main-page> 
+    </div>
   </div>
 </div>

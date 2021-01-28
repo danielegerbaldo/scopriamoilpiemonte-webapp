@@ -14,7 +14,7 @@ import * as utenteSindaco from '../jsonTest/sindaco.json';
 export class AppComponent {
   title = 'Scopriamo il Piemonte';
   StatoLogin = StatoLogin;
-  statoLogin = StatoLogin.ospite;
+  statoLogin = StatoLogin.effettuato;
   utente: Utente = {"nome": "", "ruolo":Ruolo.base, "comune": ""};
 
   constructor(){
