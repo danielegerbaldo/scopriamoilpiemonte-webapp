@@ -12,16 +12,14 @@
     <div *ngSwitchCase="StatoLogin.accesso">
       <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.registrazione)">Registrati</button>
     </div>
-    <div *ngSwitchCase="StatoLogin.effettuato">
-      <div class="utente_loggato">
-        <!-- aggiungere un'immagine -->
-        <div>
-          <p class="nome"> nome utente </p>
-          <p class="ruolo"> ruolo </p>
-        </div>
-        <div>
-          <button class="btn logout" (click)="changeLoginStatus(StatoLogin.ospite)">Esci</button>
-        </div>
+    <div *ngSwitchCase="StatoLogin.effettuato" class="d-flex flex-row justify-content-start align-items-center">
+      <!-- aggiungere un'immagine -->
+      <div class="mr-0 mr-sm-3">
+        <p class="nome"> nome utente </p>
+        <p class="ruolo"> ruolo </p>
+      </div>
+      <div>
+        <button class="btn btn-danger" (click)="changeLoginStatus(StatoLogin.ospite)">Esci</button>
       </div>
     </div>
   </div>
