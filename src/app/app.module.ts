@@ -13,6 +13,7 @@ import { IscrizioniComponent } from './sindaco/iscrizioni/iscrizioni.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { FiltersComponent } from './main-page/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MainPageComponent } from './main-page/main-page.component';
     HeaderComponent,
     NavbarComponent,
     MainPageComponent,
+    FiltersComponent,
 
   ],
     imports: [

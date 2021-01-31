@@ -1,0 +1,10 @@
+<div class="d-flex flex-column filterBox">
+  
+  <div class="mt-2">
+    <label for="distanza">Distanza:</label> <br>
+    <input type="range" #selettoreDistanza name="distanza" min="5" max="400" value="{{distanza}}" 
+      (input)="setDistance(selettoreDistanza.value)"
+      (change)="confermaDistanza(selettoreDistanza.value)">
+    <label class="ml-2">{{distanza}} km</label>
+  </div>
+</div>
