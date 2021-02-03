@@ -11,8 +11,8 @@ export class NavbarComponent implements OnInit {
 
   @Input() ruoloUtente: Ruolo;
   elementi: String[];
-  elementi_base = ["iscrizioni", "mappa"];
-  elementi_sindaco = ["crea evento", "crea sondaggio"];
+  elementi_base = ["eventi", "iscrizioni", "mappa"];
+  elementi_sindaco = ["crea evento", "crea sondaggio", "da confermare"];
   elementi_collaboratore = ["crea evento", "crea sondaggio"];
 
   constructor() { }

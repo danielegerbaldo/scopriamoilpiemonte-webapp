@@ -1,10 +1,31 @@
 <div class="d-flex flex-column filterBox">
-  
   <div class="mt-2">
-    <label for="distanza">Distanza:</label> <br>
-    <input type="range" #selettoreDistanza name="distanza" min="5" max="400" value="{{distanza}}" 
-      (input)="setDistance(selettoreDistanza.value)"
-      (change)="confermaDistanza(selettoreDistanza.value)">
+    <label for="selettoreDistanza">Distanza:</label> <br>
+    <input type="range" #selettoreDistanza name="distanza" min="5" max="400" [(ngModel)]="distanza">
     <label class="ml-2">{{distanza}} km</label>
+  </div>
+  <div class="mt-2">
+    <label for="checkNascondiPieni">Disponibilità:</label> <br>
+    <input type="checkbox" #checkNascondiPieni name="nascondiPieni" [(ngModel)]="nascondiPieni">
+    <label class="ml-2">nascondi eventi pieni</label>
+  </div>
+  <div class="mt-2">
+    <label>Prezzo:</label> <br>
+    <label for="selettorePrezzoMin">Da:</label> <br>
+    <input type="range" #selettorePrezzoMin name="prezzoMin" min="0" max="500" [(ngModel)]="prezzoMin"
+      (input)="verificaPrezzi()">
+    <label class="ml-2">{{prezzoMin}} €</label> <br>
+    <label for="selettorePrezzoMax">A:</label> <br>
+    <input type="range" #selettorePrezzoMax name="prezzoMax" min="{{prezzoMin}}" max="500" [(ngModel)]="prezzoMax">
+    <label class="ml-2">{{prezzoMax}} €</label>
+  </div>
+  <div class="mt-2">
+    <label>Data:</label> <br>
+    <label for="selettoreDataInizio">Da:</label> <br>
+    <input type="date" #selettoreDataInizio name="dataInizio" [value]="dataMin | date:'yyyy-MM-dd'"
+      (input)="dataMin=$event.target.valueAsDate"> <br>
+      <label for="selettoreDataFine" class="mt-1">A:</label> <br>
+      <input type="date" #selettoreDataFine name="dataFine" [value]="dataMax | date:'yyyy-MM-dd'"
+        (input)="dataMax=$event.target.valueAsDate"> <br>
   </div>
 </div>

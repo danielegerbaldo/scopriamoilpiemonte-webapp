@@ -8,18 +8,20 @@ import { Component, OnInit } from '@angular/core';
 export class FiltersComponent implements OnInit {
 
   distanza = 50;
+  nascondiPieni = false;
+  prezzoMin = 0;
+  prezzoMax = 500;
+  dataMin = new Date();
+  dataMax: Date;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  setDistance(val: number){
-    this.distanza = val;
+  verificaPrezzi(){
+    if(this.prezzoMin > this.prezzoMax){
+      this.prezzoMax = this.prezzoMin;
+    }
   }
-
-  confermaDistanza(val: number){
-    console.log("distanza: " + val + "km");
-  }
-
 }
