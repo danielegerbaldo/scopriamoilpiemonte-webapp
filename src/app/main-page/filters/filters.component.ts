@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FiltriEventi } from '../../../models/data.model';
+import { FilterService } from '../../../services/filter.service';
 
 @Component({
   selector: 'app-filters',
@@ -7,21 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltersComponent implements OnInit {
 
-  distanza = 50;
-  nascondiPieni = false;
-  prezzoMin = 0;
-  prezzoMax = 500;
-  dataMin = new Date();
-  dataMax: Date;
+  filtri: FiltriEventi;
 
-  constructor() { }
+  constructor(private filterService: FilterService) { }
 
   ngOnInit(): void {
+    this.getFiltri();
+    this.filtri.dataMax = new Date();
+    this.filtri.dataMax.setFullYear(this.filtri.dataMin.getFullYear() +1);
   }
 
   verificaPrezzi(){
-    if(this.prezzoMin > this.prezzoMax){
-      this.prezzoMax = this.prezzoMin;
+    if(this.filtri.prezzoMin > this.filtri.prezzoMax){
+      this.filtri.prezzoMax = this.filtri.prezzoMin;
     }
+  }
+
+  getFiltri(){
+    this.filtri = this.filterService.getFiltri();    
   }
 }
