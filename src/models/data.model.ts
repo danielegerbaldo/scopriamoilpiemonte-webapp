@@ -1,3 +1,4 @@
+import { Url } from "url";
 import {Ruolo} from "./enums.model";
 
 export class Utente{
@@ -13,4 +14,20 @@ export class FiltriEventi{
   prezzoMax: number;
   dataMin: Date;
   dataMax: Date;
+}
+
+export class Evento{
+  nome: String;
+  descrizione: String;
+  numeroPosti: number;
+  partecipantiMin: number;
+  prenotazioni: number;
+  prezzo: number;
+  data: Date;
+  liveStreaming: boolean;
+  tipo: String;
+  tema: String;
+  ricorrenza: String;
+  immagine: Url;
+  luogo: String;
 }

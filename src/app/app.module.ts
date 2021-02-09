@@ -10,7 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { FiltersComponent } from './main-page/filters/filters.component';
-import { FilterService } from '../services/filter.service'
+import { FilterService } from '../services/filter.service';
+import { VistaEventiComponent } from './main-page/vista-eventi/vista-eventi.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FilterService } from '../services/filter.service'
     NavbarComponent,
     MainPageComponent,
     FiltersComponent,
+    VistaEventiComponent,
 
   ],
     imports: [
