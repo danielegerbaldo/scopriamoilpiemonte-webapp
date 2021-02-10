@@ -6,3 +6,24 @@
   border-radius: 6px;
   max-width: 500px;
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  left: 30px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+ }
+ .show-scrollTop {
+    opacity: 1;
+    transition: all .2s ease-in-out;
+ }
+
+ button{
+  background-color: blue;
+  color: azure;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+ }

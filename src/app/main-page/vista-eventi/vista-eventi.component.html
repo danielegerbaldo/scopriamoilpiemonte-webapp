@@ -6,3 +6,9 @@
     <p>Prezzo: {{ev.prezzo}}</p>
   </div>
 </div>
+
+<div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <button type="button" class="btn active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+    Top
+  </button>
+</div>
