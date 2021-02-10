@@ -1,6 +1,8 @@
-<div *ngFor="let ev of listaEventi" class="m-2 p-2 evento">
-  <p>{{ev.nome}}</p>
-  <p>{{ev.descrizione}}</p>
-  <p>Posti rimanenti: {{ev.numeroPosti - ev.prenotazioni}}</p>
-  <p>Prezzo: {{ev.prezzo}}</p>
+<div class="d-flex flex-row flex-wrap justify-content-center">
+  <div *ngFor="let ev of listaEventi" class="m-2 p-2 evento">
+    <p>{{ev.nome}}</p>
+    <p>{{ev.descrizione}}</p>
+    <p>Posti rimanenti: {{ev.numeroPosti - ev.prenotazioni}}</p>
+    <p>Prezzo: {{ev.prezzo}}</p>
+  </div>
 </div>
