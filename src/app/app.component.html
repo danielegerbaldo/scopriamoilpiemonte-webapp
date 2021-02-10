@@ -1,10 +1,11 @@
 <div>
-  <app-header [statoLogin]="statoLogin" (loginEmitter)="modificaStatoLogin($event)"></app-header>
+  <app-header></app-header>
 </div>
 <div>
   <app-navbar 
-    *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato"
-    [ruoloUtente]="utente.ruolo"></app-navbar>
+    [ruoloUtente] = "utente.ruolo"
+    *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato">
+  </app-navbar>
 </div>
 <div>
   <div [ngSwitch]="statoLogin">
@@ -12,12 +13,12 @@
        <app-main-page></app-main-page> 
     </div>
     <div *ngSwitchCase="StatoLogin.registrazione"> 
-      <app-registrati (nuovaPagina)="getPagina($event)"></app-registrati> 
+      <app-registrati></app-registrati> 
     </div>
     <div *ngSwitchCase="StatoLogin.accesso"> 
-      <app-login (nuovaPagina)="getPagina($event)"></app-login> 
+      <app-login></app-login> 
     </div>
-    <div *ngSwitchCase="StatoLogin.effettuato" class="w-100"> 
+    <div *ngSwitchCase="StatoLogin.effettuato"> 
       <app-main-page></app-main-page> 
     </div>
   </div>

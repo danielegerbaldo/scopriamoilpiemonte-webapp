@@ -21,7 +21,6 @@ export class VistaEventiComponent implements OnInit {
     for(var i = 0; i < 100; i++){
       this.listaEventi.push(ev);
     }
-    console.log(this.listaEventi);
   }
 
   ngOnInit(): void {

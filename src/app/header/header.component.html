@@ -15,11 +15,11 @@
     <div *ngSwitchCase="StatoLogin.effettuato" class="d-flex flex-row justify-content-start align-items-center">
       <!-- aggiungere un'immagine -->
       <div class="mr-0 mr-sm-3">
-        <p class="nome"> nome utente </p>
-        <p class="ruolo"> ruolo </p>
+        <p class="nome mb-1 mt-2"> <b> {{utente.nome}} </b> </p>
+        <p class="ruolo"> {{utente.ruolo}} </p>
       </div>
       <div>
-        <button class="btn btn-danger" (click)="changeLoginStatus(StatoLogin.ospite)">Esci</button>
+        <button class="btn btn-danger" (click)="changeLoginStatus(StatoLogin.ospite);logOut()">Esci</button>
       </div>
     </div>
   </div>

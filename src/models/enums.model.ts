@@ -6,7 +6,8 @@ export enum StatoLogin{
 }
 
 export enum Ruolo{
-  base,
-  collaboratore,
-  sindaco
+  ospite = "ospite",
+  base = "",
+  collaboratore = "collaboratore",
+  sindaco = "sindaco"
 }

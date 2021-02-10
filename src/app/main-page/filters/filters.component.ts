@@ -15,8 +15,8 @@ export class FiltersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFiltri();
-    this.filtri.dataMax = new Date();
-    this.filtri.dataMax.setFullYear(this.filtri.dataMin.getFullYear() +1);
+    this.filterService.filtri.dataMax = new Date();
+    this.filterService.filtri.dataMax.setFullYear(this.filtri.dataMin.getFullYear() +1);
   }
 
   verificaPrezzi(){

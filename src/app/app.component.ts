@@ -1,35 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {StatoLogin, Ruolo} from "../models/enums.model";
-import {Utente} from "../models/data.model";
-
-// Test statico
-import * as utenteSindaco from '../jsonTest/sindaco.json';
+import { StatoLogin } from "../models/enums.model";
+import { Utente } from "../models/data.model";
+import { UserService } from "../services/user.service"
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Scopriamo il Piemonte';
   StatoLogin = StatoLogin;
-  statoLogin = StatoLogin.effettuato;
-  utente: Utente = {"nome": "", "ruolo":Ruolo.base, "comune": ""};
+  statoLogin: StatoLogin;
+  utente: Utente;
 
-  constructor(){
-    // Carico i dati statici dal mio json
-    var tmp = (utenteSindaco as any).default;
-    this.utente.comune = tmp.comune;
-    this.utente.nome = tmp.nome;
-    this.utente.ruolo = Ruolo[tmp.ruolo as keyof typeof Ruolo];
+  constructor(private userService: UserService){
+    this.userService.utenteChange.subscribe(utente => this.utente = utente);
+    this.userService.statoLoginChange.subscribe(statoLogin => this.statoLogin = statoLogin);
   }
 
   ngOnInit(){
-    console.log(this.utente);
+    this.getUtente();
+    this.getStatoLogin();
   }
 
-  modificaStatoLogin(s: StatoLogin){
-    this.statoLogin = s;
+  getUtente(): void{
+    this.userService.getUtente().subscribe(utente => this.utente = utente);
+  }
+
+  getStatoLogin(): void{
+    this.userService.getStatoLogin().subscribe(statoLogin => this.statoLogin = statoLogin);
   }
 }
