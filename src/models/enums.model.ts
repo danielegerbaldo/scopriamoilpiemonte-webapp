@@ -11,3 +11,8 @@ export enum Ruolo{
   collaboratore = "collaboratore",
   sindaco = "sindaco"
 }
+
+export enum Pagina{
+  eventi,
+  mappa
+}

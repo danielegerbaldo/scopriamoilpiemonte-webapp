@@ -3,12 +3,36 @@
 </div>
 <div>
   <app-navbar 
+    (pageEmitter)="riceviEventoNavbar($event)"
     [ruoloUtente] = "utente.ruolo"
     *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato">
   </app-navbar>
 </div>
 <div>
-  <div [ngSwitch]="statoLogin">
+  <div *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato; else inCorso">
+    <div [ngSwitch]="pagina">
+      <div *ngSwitchCase="Pagina.eventi">
+        <app-main-page></app-main-page> 
+      </div>
+      <div *ngSwitchCase="Pagina.mappa">
+        <app-mappa></app-mappa>
+      </div>
+      <div *ngSwitchDefault>
+        <h2> Qualcosa è andato storto </h2>
+      </div>
+    </div>
+  </div>
+  <ng-template #inCorso> <!-- else -->
+    <div *ngIf="statoLogin === StatoLogin.registrazione; else accesso">
+      <app-registrati></app-registrati> 
+    </div>
+    <ng-template #accesso>
+      <div *ngIf="statoLogin === StatoLogin.accesso">
+        <app-login></app-login> 
+      </div>
+    </ng-template>
+  </ng-template>
+  <!-- <div [ngSwitch]="statoLogin">
     <div *ngSwitchCase="StatoLogin.ospite">
        <app-main-page></app-main-page> 
     </div>
@@ -18,8 +42,18 @@
     <div *ngSwitchCase="StatoLogin.accesso"> 
       <app-login></app-login> 
     </div>
-    <div *ngSwitchCase="StatoLogin.effettuato"> 
-      <app-main-page></app-main-page> 
+    <div *ngSwitchCase="StatoLogin.effettuato">
+      <div [ngSwitch]="pagina">
+        <div *ngSwitchCase="Pagina.eventi">
+          <app-main-page></app-main-page> 
+        </div>
+        <div *ngSwitchCase="Pagina.mappa">
+          <app-mappa></app-mappa>
+        </div>
+        <div *ngSwitchDefault>
+          <h2> Qualcosa è andato storto </h2>
+        </div>
+      </div>
     </div>
-  </div>
+  </div> -->
 </div>

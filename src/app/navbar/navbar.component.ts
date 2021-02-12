@@ -1,6 +1,6 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
-import { Ruolo } from "../../models/enums.model";
+import { Ruolo, Pagina } from "../../models/enums.model";
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit, OnChanges {
   elementi_base = ["iscrizioni"];
   elementi_sindaco = ["iscrizioni", "crea evento", "crea sondaggio", "da confermare"];
   elementi_collaboratore = ["iscrizioni", "crea evento", "crea sondaggio"];
+  @Output() pageEmitter = new EventEmitter<Pagina>();
 
   constructor() {}
 
@@ -37,5 +38,10 @@ export class NavbarComponent implements OnInit, OnChanges {
     else if(this.ruoloUtente === Ruolo.sindaco){
       this.elementi = this.elementi.concat(this.elementi_sindaco);
     }
+  }
+
+  cambiaPagina(p: String){
+    var pg: Pagina = Pagina[p as keyof typeof Pagina];
+    this.pageEmitter.emit(pg);
   }
 }

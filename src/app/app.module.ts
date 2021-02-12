@@ -13,6 +13,7 @@ import { FiltersComponent } from './main-page/filters/filters.component';
 import { FilterService } from '../services/filter.service';
 import { VistaEventiComponent } from './main-page/vista-eventi/vista-eventi.component'
 import { UserService } from '../services/user.service';
+import { MappaComponent } from './mappa/mappa.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { UserService } from '../services/user.service';
     MainPageComponent,
     FiltersComponent,
     VistaEventiComponent,
+    MappaComponent,
 
   ],
     imports: [

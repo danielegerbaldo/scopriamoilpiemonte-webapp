@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StatoLogin } from "../models/enums.model";
+import { StatoLogin, Pagina } from "../models/enums.model";
 import { Utente } from "../models/data.model";
 import { UserService } from "../services/user.service"
 
@@ -10,10 +10,13 @@ import { UserService } from "../services/user.service"
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  
   title = 'Scopriamo il Piemonte';
   StatoLogin = StatoLogin;
   statoLogin: StatoLogin;
   utente: Utente;
+  Pagina = Pagina;
+  pagina: Pagina = Pagina.eventi;
 
   constructor(private userService: UserService){
     this.userService.utenteChange.subscribe(utente => this.utente = utente);
@@ -31,5 +34,9 @@ export class AppComponent implements OnInit{
 
   getStatoLogin(): void{
     this.userService.getStatoLogin().subscribe(statoLogin => this.statoLogin = statoLogin);
+  }
+
+  riceviEventoNavbar(p: Pagina){
+    this.pagina = p;
   }
 }
