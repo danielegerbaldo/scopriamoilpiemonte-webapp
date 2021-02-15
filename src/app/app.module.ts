@@ -14,6 +14,7 @@ import { FilterService } from '../services/filter.service';
 import { VistaEventiComponent } from './main-page/vista-eventi/vista-eventi.component'
 import { UserService } from '../services/user.service';
 import { MappaComponent } from './mappa/mappa.component';
+import { GeneraEventoComponent } from './genera-evento/genera-evento.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MappaComponent } from './mappa/mappa.component';
     FiltersComponent,
     VistaEventiComponent,
     MappaComponent,
+    GeneraEventoComponent,
 
   ],
     imports: [

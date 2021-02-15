@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit, OnChanges {
   }
 
   cambiaPagina(p: String){
+    p = p.replace(/\s+/g, '');
     var pg: Pagina = Pagina[p as keyof typeof Pagina];
     this.pageEmitter.emit(pg);
   }
