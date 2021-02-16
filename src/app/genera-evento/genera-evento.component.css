@@ -6,9 +6,16 @@ form{
   border-style: solid;
   border-width: 2px;
   border-radius: 12px;
-  text-align: center;
 }
 
 input, textarea{
   background-color: azure;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
 }

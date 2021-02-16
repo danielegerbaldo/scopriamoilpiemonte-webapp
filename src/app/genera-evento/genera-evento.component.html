@@ -1,6 +1,6 @@
 <div [hidden]="submitted">
-  <form class="mt-3 p-3" (ngSubmit)="onSubmit()" #creaEvento="ngForm">
-    <h2>Crea evento</h2>
+  <form class="form-horizontal" (ngSubmit)="onSubmit()" #creaEvento="ngForm">
+    <h2 class="text-center">Crea evento</h2>
     <div class="form-group">
       <label class="control-label" for="nome">nome: </label>
       <input class="form-control" type="text" id="nome" required 
@@ -31,15 +31,15 @@
       <input class="form-control" type="date" id="data" required
         [(ngModel)]="evento.data" name="data">
     </div>
-    <div class="form-check">
+    <div class="form-check form-group">
       <label class="form-check-label" for="streaming"> 
         <input class="form-check-input" type="checkbox" id="streaming"
         [(ngModel)]="evento.liveStreaming" name="streaming">
         l'evento supporterà lo streaming?
       </label>
     </div>
-    <div>
-      <p>Tipo: </p>
+    <div class="form-group">
+      Tipo:
       <div class="form-check">
         <input class="form-check-input" type="radio" name="tipo" id="ricorrente" value="ricorrente" [(ngModel)]="evento.tipo">
         <label class="form-check-label" for="ricorrente"> ricorrente</label>

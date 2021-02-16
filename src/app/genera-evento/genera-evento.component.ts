@@ -16,7 +16,7 @@ export class GeneraEventoComponent implements OnInit {
     "partecipantiMin": 0,
     "prenotazioni": 0,
     "prezzo": 0,
-    "data": new Date(),
+    "data": null,
     "liveStreaming": false,
     "tipo": "",
     "tema": "",
