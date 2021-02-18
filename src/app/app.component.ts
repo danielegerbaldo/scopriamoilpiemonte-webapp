@@ -36,7 +36,7 @@ export class AppComponent implements OnInit{
     this.userService.getStatoLogin().subscribe(statoLogin => this.statoLogin = statoLogin);
   }
 
-  riceviEventoNavbar(p: Pagina){
+  riceviPagina(p: Pagina){
     this.pagina = p;
   }
 }

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {Ruolo, StatoLogin} from "../../models/enums.model"
 import { Utente } from "../../models/data.model";
 import { UserService } from "../../services/user.service"
-import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-header',

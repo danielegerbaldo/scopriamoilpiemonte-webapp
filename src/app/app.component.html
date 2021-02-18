@@ -3,7 +3,7 @@
 </div>
 <div>
   <app-navbar 
-    (pageEmitter)="riceviEventoNavbar($event)"
+    (pageEmitter)="riceviPagina($event)"
     [ruoloUtente] = "utente.ruolo"
     *ngIf="statoLogin === StatoLogin.ospite || statoLogin === StatoLogin.effettuato">
   </app-navbar>
@@ -31,32 +31,8 @@
     </div>
     <ng-template #accesso>
       <div *ngIf="statoLogin === StatoLogin.accesso">
-        <app-login></app-login> 
+        <app-login (pageEmitter)="riceviPagina($event)"></app-login> 
       </div>
     </ng-template>
   </ng-template>
-  <!-- <div [ngSwitch]="statoLogin">
-    <div *ngSwitchCase="StatoLogin.ospite">
-       <app-main-page></app-main-page> 
-    </div>
-    <div *ngSwitchCase="StatoLogin.registrazione"> 
-      <app-registrati></app-registrati> 
-    </div>
-    <div *ngSwitchCase="StatoLogin.accesso"> 
-      <app-login></app-login> 
-    </div>
-    <div *ngSwitchCase="StatoLogin.effettuato">
-      <div [ngSwitch]="pagina">
-        <div *ngSwitchCase="Pagina.eventi">
-          <app-main-page></app-main-page> 
-        </div>
-        <div *ngSwitchCase="Pagina.mappa">
-          <app-mappa></app-mappa>
-        </div>
-        <div *ngSwitchDefault>
-          <h2> Qualcosa è andato storto </h2>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </div>
