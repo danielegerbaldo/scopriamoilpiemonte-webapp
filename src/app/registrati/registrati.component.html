@@ -1,27 +1,33 @@
-<div class="superDiv">
-  <h1>
-    REGISTRAZIONE
-  </h1>
-
-  <form class="registrazione">
-
-    <h2>Compila i seguenti campi</h2>
-    <label>Inserire il tuo nome</label>
-    <input name="nome" id="inputNome" placeholder="Nome Utente">
-    <label>Inserire l'email</label>
-    <input name="email" type="email" id="inputMail" placeholder="Email Address">
-    <label>Inserire la password</label>
-    <input name="password" type="password" id="inputPassword" placeholder="Password" [(ngModel)]="pw1">
-    <!--[(ngModel)]="pw1" rappresenta la variabile in cui viene memorizzata nel javascript-->
-    <label>Confermare la password</label>
-    <input name="password" type="password" id="inputConfermaPassword" placeholder="Conferma Password" [(ngModel)]="pw2">
-    <div *ngIf="passwordDiverse()">
-      <label class="pwError">le due password non corrispondono!</label>
+<form class="form-horizontal mt-3 p-3" (ngSubmit)="registrati()" #registrazione="ngForm">
+  <h1>REGISTRAZIONE</h1>
+  <h2>Compila i seguenti campi</h2>
+  <div class="form-group">
+    <label class="control-label" for="nome">Inserire il tuo nome: </label>
+    <input class="form-control" type="text" id="nome" required 
+      [(ngModel)]="nome" name="nome" placeholder="Nome Utente">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="email">Inserire l'email: </label>
+    <input class="form-control" type="email" id="email" required 
+      [(ngModel)]="email" name="email" placeholder="Indirizzo Email">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="pass1">Inserire la password: </label>
+    <input class="form-control" type="password" id="pass1" required 
+      [(ngModel)]="pw1" name="pass1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="pass2">Confermare la password: </label>
+    <input class="form-control" type="password" id="pass2" required 
+      [(ngModel)]="pw2" name="pass2" placeholder="Confermare la password">
+    <div class="erroreAccesso" *ngIf="passwordDiverse()">
+      le due password non corrispondono!
     </div>
-    <button class="btn" type="button">Registrati</button>
+  </div>
+  <div class="form-group">
+    <div class="submit">
+      <button type="submit" class="btn btn-success" [disabled]="!registrazione.form.valid || passwordDiverse()">Registrati</button>
+    </div>
+  </div>
 
-  </form>
-
-  <button (click)="annulla()" class="annulla btn">ANNULLA</button>
-
-</div>
+</form>

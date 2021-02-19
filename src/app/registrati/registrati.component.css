@@ -1,40 +1,46 @@
-.superDiv{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+h1, h2{
+  text-align: center;
 }
 
-.registrazione{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+.submit{
+  text-align: center;
 }
 
-.platform{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+form{
+  background-color: dodgerblue;
+  max-width: 70%;
+  margin: auto;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 12px;
 }
 
-.annulla{
-  margin-top: 60px;
-  background: red;
-}
-
-.pwError{
-  color: red;
-}
-
-.registrati{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.erroreAccesso{
+  background-color: red;
+  color: azure;
+  margin-top: 0px;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  padding-left: 7px;
 }
 
 .btn{
   width: 200px;
   font-weight: bold;
   border-radius: 10px;
+}
+
+input, textarea{
+  background-color: azure;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
 }

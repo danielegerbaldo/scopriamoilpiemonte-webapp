@@ -1,4 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import { StatoLogin } from "../../models/enums.model"
+import { UserService } from "../../services/user.service"
 
 @Component({
   selector: 'app-registrati',
@@ -7,18 +9,18 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class RegistratiComponent implements OnInit {
 
-  @Output() nuovaPagina = new EventEmitter<string>();
-
+  nome: string;
+  email: string;
   pw1: string;
   pw2: string;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
-  annulla(){
-    this.nuovaPagina.emit('login')
+  registrati(){
+    this.userService.setStatoLogin(StatoLogin.accesso);
   }
 
   passwordDiverse(){

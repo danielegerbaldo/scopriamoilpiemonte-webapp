@@ -11,8 +11,8 @@
       <label class="control-label" for="password">password: </label>
       <input class="form-control" type="password" id="password" required 
         [(ngModel)]="password" name="password" placeholder="password">
+      <div *ngIf="utenteSconosciuto" class="erroreAccesso">Utente o password errati!!</div>
     </div>
-    <label *ngIf="utenteSconosciuto" class="erroreAccesso">Utente o password errati!!</label>
     <div class="form-group">
       <div class="submit">
         <button type="submit" class="btn btn-success" [disabled]="!login.form.valid">Conferma</button>
