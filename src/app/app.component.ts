@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatoLogin, Pagina } from "../models/enums.model";
 import { Utente } from "../models/data.model";
 import { UserService } from "../services/user.service"
+import { BingMapsLoader } from '../services/map-loader.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,17 @@ export class AppComponent implements OnInit{
   Pagina = Pagina;
   pagina: Pagina = Pagina.eventi;
 
+  mapReady = false;
+
   constructor(private userService: UserService){
     this.userService.utenteChange.subscribe(utente => this.utente = utente);
     this.userService.statoLoginChange.subscribe(statoLogin => this.statoLogin = statoLogin);
+
+    BingMapsLoader.load()
+            .then(res => {
+                console.log('BingMapsLoader.load.then', res);
+                this.mapReady = true;
+        });
   }
 
   ngOnInit(){
