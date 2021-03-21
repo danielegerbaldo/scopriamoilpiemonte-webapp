@@ -1,12 +1,1 @@
 <div id='myMap' style='width: 100vw; height: 100vh;'></div>
-<script type='text/javascript'>
-    function loadMapScenario() {
-        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-                credentials: 'ArOu7EQ5tMWMGG0UsGGxRKBYx4XfoCLXsceSt6ZCkloQ3urZS6MevEBDjaKwuFv7'
-        });
-        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
-        var layer = new Microsoft.Maps.Layer();
-        layer.add(pushpin);
-        map.layers.insert(layer);
-    }
-</script>
