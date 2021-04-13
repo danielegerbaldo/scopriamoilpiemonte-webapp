@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Evento } from '../../../models/data.model';
+import { EventiService } from "../../../services/eventi.service"
 
 // test
 import * as templateEvento from '../../../jsonTest/evento.json';
@@ -15,15 +16,21 @@ export class VistaEventiComponent implements OnInit {
   listaEventi: Evento[] = [];
   windowScrolled: boolean;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    var tmp = (templateEvento as any).default;
+  constructor(@Inject(DOCUMENT) private document: Document, private eventiService : EventiService) {
+    /*var tmp = (templateEvento as any).default;
     var ev = Object.assign(new Evento, tmp);
     for(var i = 0; i < 100; i++){
       this.listaEventi.push(ev);
-    }
+    }*/
   }
 
   ngOnInit(): void {
+    this.getEventi();
+  }
+
+  getEventi(){
+    this.eventiService.getEventi()
+        .subscribe(eventi => this.listaEventi = eventi);
   }
 
   // Scroll to top button

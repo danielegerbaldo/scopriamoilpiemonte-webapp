@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { VistaEventiComponent } from './main-page/vista-eventi/vista-eventi.comp
 import { UserService } from '../services/user.service';
 import { MappaComponent } from './mappa/mappa.component';
 import { GeneraEventoComponent } from './genera-evento/genera-evento.component';
+import { EventiService } from 'src/services/eventi.service';
 
 
 @NgModule({
@@ -28,13 +30,13 @@ import { GeneraEventoComponent } from './genera-evento/genera-evento.component';
     FiltersComponent,
     VistaEventiComponent,
     MappaComponent,
-    GeneraEventoComponent,
-
+    GeneraEventoComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
+        HttpClientModule
     ],
   providers: [
     FilterService,
