@@ -20,7 +20,6 @@ export class EventiService {
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
   getEvento(id: number): Observable<Evento> {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<Evento>(url).pipe(

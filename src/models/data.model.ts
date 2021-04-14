@@ -19,9 +19,9 @@ export class FiltriEventi{
 export class Evento{
   nome: String;
   descrizione: String;
-  numeroPosti: number;
+  numMaxPartecipanti: number;
   partecipantiMin: number;
-  prenotazioni: number;
+  partecipanti: number;
   prezzo: number;
   data: Date;
   liveStreaming: boolean;

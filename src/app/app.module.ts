@@ -40,7 +40,8 @@ import { EventiService } from 'src/services/eventi.service';
     ],
   providers: [
     FilterService,
-    UserService
+    UserService,
+    EventiService
   ],
   bootstrap: [AppComponent]
 })

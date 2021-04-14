@@ -12,9 +12,9 @@ export class GeneraEventoComponent implements OnInit {
   evento: Evento = {
     "nome": "",
     "descrizione": "",
-    "numeroPosti": 1000,
+    "numMaxPartecipanti": 1000,
     "partecipantiMin": 0,
-    "prenotazioni": 0,
+    "partecipanti": 0,
     "prezzo": 0,
     "data": null,
     "liveStreaming": false,
