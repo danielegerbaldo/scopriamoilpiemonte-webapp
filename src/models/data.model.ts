@@ -1,5 +1,5 @@
 import { Url } from "url";
-import {Ruolo} from "./enums.model";
+import { Ruolo } from "./enums.model";
 
 export class Utente{
   nome: String;
@@ -17,6 +17,7 @@ export class FiltriEventi{
 }
 
 export class Evento{
+  id: number;
   nome: String;
   descrizione: String;
   numMaxPartecipanti: number;
@@ -25,6 +26,9 @@ export class Evento{
   prezzo: number;
   data: Date;
   liveStreaming: boolean;
+  indirizzo: string;
+  latitudine: number;
+  longitudine: number;
   tipo: String;
   tema: String;
   ricorrenza: String;

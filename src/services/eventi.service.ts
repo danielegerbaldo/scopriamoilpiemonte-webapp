@@ -9,7 +9,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class EventiService {
 
-  private baseUrl = "http://localhost:8080/api/v1/evento";
+  private baseUrl = "http://localhost/api/v1/evento";
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +27,14 @@ export class EventiService {
     const url = `${this.baseUrl}/${id}`;
     return this.http.get<Evento>(url).pipe(
       catchError(this.handleError<Evento>(`getEvento id=${id}`))
+    );
+  }
+
+  /** POST: add a new hero to the server */
+  addEvento(evento: Evento): Observable<Evento> {
+    return this.http.post<Evento>(this.baseUrl, evento, this.httpOptions).pipe(
+      tap((newEvento: Evento) => console.log(`added hero w/ id=${newEvento.id}`)),
+      catchError(this.handleError<Evento>('addHero'))
     );
   }
 
