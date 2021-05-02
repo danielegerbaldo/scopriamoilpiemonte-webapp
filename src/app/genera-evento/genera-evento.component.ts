@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Evento } from "../../models/data.model";
 import { EventiService } from "../../services/eventi.service";
 import { UserService } from "../../services/user.service";
@@ -27,7 +27,7 @@ export class GeneraEventoComponent implements OnInit {
   map = null;
   pin = null;
 
-  @ViewChild('myMap') myMap; // using ViewChild to reference the div instead of setting an id
+  @ViewChild('myMap') myMap : ElementRef<HTMLDivElement>; // using ViewChild to reference the div instead of setting an id
 
   evento: Evento = {
     "id": null,
@@ -52,7 +52,9 @@ export class GeneraEventoComponent implements OnInit {
 
   constructor(private eventiService : EventiService, private userService : UserService, private http: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(){
     if (typeof Microsoft !== 'undefined') {
       console.log('BingMapComponent.ngOnInit');
       this.loadMap();
@@ -60,7 +62,7 @@ export class GeneraEventoComponent implements OnInit {
   }
 
   loadMap(){
-    this.map = new Microsoft.Maps.Map('#myMap', {
+    this.map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
       credentials: this.BingMapsAPIKey,
       center: new Microsoft.Maps.Location(45.071222, 7.685090)
     });
@@ -75,8 +77,7 @@ export class GeneraEventoComponent implements OnInit {
       this.evento.latitudine = loc.latitude;
       this.evento.longitudine = loc.longitude;
       this.pin = new Microsoft.Maps.Pushpin(loc, {
-        title: 'evento',
-        text: 'evento',
+        title: '' + this.evento.nome,
         color: 'red'
       });
       this.map.entities.clear();
@@ -85,47 +86,28 @@ export class GeneraEventoComponent implements OnInit {
   }
 
   onSubmit = () => { 
-    
-    var sm = new Microsoft.Maps.Search.SearchManager(this.map);
-    /*var requestOptions = {
-      where: this.evento.indirizzo,
-      callback: this.submitCallback
+    Microsoft.Maps.loadModule(
+      'Microsoft.Maps.Search',
+      this.loadSearch);
+  }
+
+  loadSearch = () => {
+    var searchManager = new Microsoft.Maps.Search.SearchManager(this.map);
+    var searchRequest = {
+      location: new Microsoft.Maps.Location(this.evento.latitudine, this.evento.longitudine),
+      callback: this.searchCallback,
+      errorCallback: function (e) {
+        console.log(e);
+      }
     }
-    sm.geocode(requestOptions);*/
-    
-    /*this.callLocalization().subscribe(
-      data => { 
-        this.evento.latitudine = data.point.coordinates[0],
-        this.evento.longitudine = data.point.coordinates[1]
-      },
-      () => this.eventiService.addEvento(this.evento)
-    );*/
-    /*this.callLocalization().subscribe(
-      data => console.log(data)
-    );*/
+    searchManager.reverseGeocode(searchRequest);
+  }
+
+  searchCallback = (r) => {
+    console.log(r);
+    this.evento.indirizzo = r.address.addressLine;
+    // this.evento.comune = r.address.locality
+    console.log(this.evento);
     this.submitted = true;
   }
-
-  submitCallback = (answer : Microsoft.Maps.Search.IGeocodeResult, userData : any) : void => {
-    console.log(answer);
-  }
-
-  callLocalization() : Observable<any>{
-    var comune = this.userService.utente.comune;
-    var request = 'https://dev.virtualearth.net/REST/v1/Locations/?maxResults=1&countryRegion=IT&locality=' 
-                  + comune + '&addressLine='
-                  + encodeURIComponent(this.evento.indirizzo) + 'key='
-                  + this.BingMapsAPIKey;
-    console.log(request);
-    //var sanitized = this.sanitizer.sanitize(4, request);
-    //console.log(sanitized);
-    /*angular.module('FrontEnd-Angular', []).config(function($sceDelegateProvider) {
-      $sceDelegateProvider.resourceUrlWhitelist([
-        self,
-        'https://dev.virtualearth.net/REST/v1/Locations/**'
-      ]);
-    });*/
-    return this.http.get(request, this.httpOptions);
-  }
-
 }

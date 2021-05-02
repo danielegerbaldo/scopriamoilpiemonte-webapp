@@ -68,10 +68,10 @@
     </div>
     <div class="form-group">
       <label class="control-label" for="coordinate">seleziona dove si terrà l'evento: </label>
-      <div id='myMap' style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
+      <div id='myMap' #myMap style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success" [disabled]="!creaEvento.form.valid">Conferma</button>
+      <button type="submit" class="btn btn-success" [disabled]="!creaEvento.form.valid || evento.latitudine == 0 || evento.longitudine == 0">Conferma</button>
     </div>
   </form>
 </div>
