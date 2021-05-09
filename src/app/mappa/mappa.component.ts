@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { EventiService } from "../../services/eventi.service";
+import { Evento } from "../../models/data.model"
 
 @Component({
   selector: 'app-mappa',
@@ -8,43 +10,52 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class MappaComponent implements OnInit {
 
   @ViewChild('myMap') myMap; // using ViewChild to reference the div instead of setting an id
+  //listaEventi : Evento[] = [];
+  colors = ["red", "blue", "green", "yellow", "pink", "orange", "violet"];
+  map;
 
-  constructor() { }
+  constructor(private eventiService : EventiService) { }
 
   ngOnInit(): void {
+    this.getEventi();
     if (typeof Microsoft !== 'undefined') {
       console.log('BingMapComponent.ngOnInit');
       this.loadMap();
     }
   }
 
+  ngOnChanges(changes : SimpleChanges){
+    console.log("changes");
+    
+  }
+
+  getEventi(){
+    this.eventiService.getEventi()
+        .subscribe(eventi => this.drawPins(eventi));
+  }
+
+  drawPins = (eventi : Evento[]) => {
+    this.map.entities.clear();
+    for(let ev of eventi){
+      this.map.entities.push(
+        new Microsoft.Maps.Pushpin(
+          new Microsoft.Maps.Location(
+            ev.latitudine, ev.longitudine
+          ),
+          {
+            title: "" + ev.nome,
+            color: this.colors[Math.random() * this.colors.length>>0]
+          }
+        )
+      );
+    }
+  }
+
   loadMap() {
-    var map = new Microsoft.Maps.Map('#myMap', {
+    this.map = new Microsoft.Maps.Map('#myMap', {
       credentials: 'ArOu7EQ5tMWMGG0UsGGxRKBYx4XfoCLXsceSt6ZCkloQ3urZS6MevEBDjaKwuFv7',
       center: new Microsoft.Maps.Location(45.071222, 7.685090)
     });
-
-    var location1 = new Microsoft.Maps.Location(45.071222, 7.685090);
-    var location2 = new Microsoft.Maps.Location(45.062049, 7.697619);
-    //Create custom Pushpin
-    var pc = new Microsoft.Maps.Pushpin(location1, {
-      title: 'Piazza Castello',
-      subTitle: 'City Center',
-      text: '1',
-      color: 'red'
-    });
-    var csm = new Microsoft.Maps.Pushpin(location2, {
-      title: 'Chiesa di Santa Maria',
-      subTitle: 'City Center',
-      text: '2',
-      color: 'blue'
-    });
-
-    //Add the pushpin to the map
-    map.entities.push(pc);
-    map.entities.push(csm);
-
-    //Add your post map load code here.
   }
 
 
