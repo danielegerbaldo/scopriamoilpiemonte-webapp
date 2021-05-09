@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Evento } from '../../../models/data.model';
+import { Observable } from 'rxjs';
 import { EventiService } from "../../../services/eventi.service";
 import {FilterService } from "../../../services/filter.service";
 import { FiltriEventi } from '../../../models/data.model'
@@ -15,7 +16,7 @@ import { FiltriEventi } from '../../../models/data.model'
 })
 export class VistaEventiComponent implements OnInit {
 
-  listaEventi: Evento[] = [];
+  listaEventi$: Observable<Evento[]>;
   windowScrolled: boolean;
   filtri: FiltriEventi;
 
@@ -23,13 +24,12 @@ export class VistaEventiComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getEventi();
     this.getFiltri();
+    this.getEventi();
   }
 
   getEventi(){
-    this.eventiService.getEventi()
-        .subscribe(eventi => this.listaEventi = eventi);
+    this.listaEventi$ = this.eventiService.getEventi();
   }
 
   getFiltri(){
@@ -38,10 +38,13 @@ export class VistaEventiComponent implements OnInit {
 
   isFiltered(evento : Evento) : boolean{
     var ret = false;
-    if(this.applyAvailabilityFilter(evento) ||
+    if(evento){
+      if(this.applyAvailabilityFilter(evento) ||
         this.applyMinDateFilter(evento) ||
-        this.applyMaxDateFilter(evento)){
-      ret = true;
+        this.applyMaxDateFilter(evento) ||
+        this.applyPricefilter(evento)){
+        ret = true;
+      }
     }
     return ret;
   }
@@ -67,6 +70,15 @@ export class VistaEventiComponent implements OnInit {
     if(this.filtri.dataMax < new Date(evento.data)){
       ret = true;
     }
+    return ret;
+  }
+
+  applyPricefilter(evento : Evento){
+    var ret = false;
+    if(this.filtri.prezzoMax < evento.prezzo ||
+      this.filtri.prezzoMin > evento.prezzo){
+        ret = true;
+      }
     return ret;
   }
 
