@@ -20,18 +20,25 @@ export class Evento{
   id: number;
   nome: String;
   descrizione: String;
+  note: String;
   numMaxPartecipanti: number;
   partecipantiMin: number;
   partecipanti: number;
+  tipoEvento: {
+    nome: String,
+    descrizione: String
+  }
   prezzo: number;
   data: Date;
-  liveStreaming: boolean;
+  streaming: boolean;
   indirizzo: string;
   latitudine: number;
   longitudine: number;
-  tipo: String;
-  tema: String;
-  ricorrenza: String;
-  immagine: Url;
-  luogo: String;
+  proprietario: number;
+  comune: number
+  //tipo: String;
+  //tema: String;
+  //ricorrenza: String;
+  //immagine: Url;
+  //luogo: String;
 }

@@ -36,11 +36,11 @@
     <div class="form-check form-group">
       <label class="form-check-label" for="streaming"> 
         <input class="form-check-input" type="checkbox" id="streaming"
-        [(ngModel)]="evento.liveStreaming" name="streaming">
+        [(ngModel)]="evento.streaming" name="streaming">
         l'evento supporterà lo streaming?
       </label>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       Tipo:
       <div class="form-check">
         <input class="form-check-input" type="radio" name="tipo" id="ricorrente" value="ricorrente" [(ngModel)]="evento.tipo">
@@ -65,13 +65,13 @@
       <label class="control-label" for="immagine">seleziona un'immagine: </label>
       <input class="form-control" type="file" id="immagine" 
         [(ngModel)]="evento.immagine" name="immagine">
-    </div>
+    </div> -->
     <div class="form-group">
       <label class="control-label" for="coordinate">seleziona dove si terrà l'evento: </label>
       <div id='myMap' #myMap style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success" [disabled]="!creaEvento.form.valid || evento.latitudine == 0 || evento.longitudine == 0">Conferma</button>
+      <button type="submit" class="btn btn-success" [disabled]="!creaEvento.form.valid || evento.latitudine == 0 || evento.longitudine == 0 || posting">Conferma</button>
     </div>
   </form>
 </div>

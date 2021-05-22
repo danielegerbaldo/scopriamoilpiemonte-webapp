@@ -33,22 +33,25 @@ export class GeneraEventoComponent implements OnInit {
     "id": null,
     "nome": "",
     "descrizione": "",
+    "note": "Created in webapp form",
     "numMaxPartecipanti": 1000,
     "partecipantiMin": 0,
     "partecipanti": 0,
     "prezzo": 0,
     "data": null,
-    "liveStreaming": false,
+    "streaming": false,
+    "tipoEvento": {
+      "nome": "bo",
+      "descrizione": "bo"
+    },
     "indirizzo": "",
     "latitudine": 0,
     "longitudine": 0,
-    "tipo": "",
-    "tema": "",
-    "ricorrenza": "",
-    "immagine": null,
-    "luogo": ""
+    "proprietario": 1,
+    "comune": 1
   };
   submitted = false;
+  posting = false;
 
   constructor(private eventiService : EventiService, private userService : UserService, private http: HttpClient) { }
 
@@ -71,7 +74,7 @@ export class GeneraEventoComponent implements OnInit {
 
   getCoordinates = (event) => {
     if (event.targetType == "map") {
-      console.log(this.evento);
+      //console.log(this.evento);
       var point = new Microsoft.Maps.Point(event.getX(), event.getY());
       var loc = event.target.tryPixelToLocation(point);
       this.evento.latitudine = loc.latitude;
@@ -86,6 +89,7 @@ export class GeneraEventoComponent implements OnInit {
   }
 
   onSubmit = () => { 
+    this.posting = true;
     Microsoft.Maps.loadModule(
       'Microsoft.Maps.Search',
       this.loadSearch);
@@ -104,10 +108,12 @@ export class GeneraEventoComponent implements OnInit {
   }
 
   searchCallback = (r) => {
-    console.log(r);
+    //console.log(r);
     this.evento.indirizzo = r.address.addressLine;
     // this.evento.comune = r.address.locality
     console.log(this.evento);
-    this.submitted = true;
+    this.eventiService.addEvento(this.evento).subscribe(
+      () => this.submitted = true
+    )
   }
 }
