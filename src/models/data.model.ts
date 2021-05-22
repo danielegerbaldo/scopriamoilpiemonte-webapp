@@ -1,10 +1,11 @@
-import { Url } from "url";
 import { Ruolo } from "./enums.model";
 
 export class Utente{
   nome: String;
   ruolo: Ruolo;
   comune: String;
+  comuneID: number;
+  userID: number;
 }
 
 export class FiltriEventi{

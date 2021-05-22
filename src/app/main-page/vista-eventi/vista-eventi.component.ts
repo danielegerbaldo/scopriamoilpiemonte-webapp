@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Evento } from '../../../models/data.model';
 import { Observable } from 'rxjs';
 import { EventiService } from "../../../services/eventi.service";
@@ -20,7 +19,7 @@ export class VistaEventiComponent implements OnInit {
   windowScrolled: boolean;
   filtri: FiltriEventi;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private eventiService : EventiService, private filterService : FilterService) {
+  constructor(private eventiService : EventiService, private filterService : FilterService) {
   }
 
   ngOnInit(): void {

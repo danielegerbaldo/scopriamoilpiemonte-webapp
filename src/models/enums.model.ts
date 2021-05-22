@@ -15,5 +15,7 @@ export enum Ruolo{
 export enum Pagina{
   eventi,
   mappa,
-  creaevento
+  iscrizioni,
+  creaevento,
+  creasondaggio
 }

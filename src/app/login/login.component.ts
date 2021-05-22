@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
       var u: Utente = {
         "nome": "Di Lignano",
         "ruolo": Ruolo.sindaco,
-        "comune": "Lignano"
+        "comune": "Lignano",
+        "comuneID": 1,
+        "userID": 1
       }
       this.userService.setUtente(u);
       this.userService.setStatoLogin(StatoLogin.effettuato);

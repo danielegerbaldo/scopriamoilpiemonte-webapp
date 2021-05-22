@@ -3,15 +3,6 @@ import { Evento } from "../../models/data.model";
 import { EventiService } from "../../services/eventi.service";
 import { UserService } from "../../services/user.service";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { mapToMapExpression } from '@angular/compiler/src/render3/util';
-//import { DomSanitizer } from '@angular/platform-browser';
-//import * as angular from "angular";
-//declare var angular : any;
-
-// declare global {
-//   const angular: typeof angular;
-// }
 
 @Component({
   selector: 'app-genera-evento',

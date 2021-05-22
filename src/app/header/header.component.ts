@@ -41,7 +41,9 @@ export class HeaderComponent implements OnInit {
     var u: Utente = {
       "nome": "",
       "ruolo": Ruolo.ospite,
-      "comune": ""
+      "comune": "",
+      "comuneID": 0,
+      "userID": 0
     }
     this.userService.setUtente(u);
   }

@@ -11,7 +11,9 @@ export class UserService {
   utente: Utente = {
     "nome": "Elena Piastra",
     "ruolo": Ruolo.sindaco,
-    "comune": "settimo"
+    "comune": "settimo",
+    "comuneID": 1,
+    "userID": 1
   }
 
   statoLogin: StatoLogin = StatoLogin.effettuato;

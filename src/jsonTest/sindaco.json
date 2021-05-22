@@ -1,5 +1,7 @@
 {
   "nome": "Elena Piastra",
   "ruolo": "sindaco",
-  "comune": "settimo"
+  "comune": "settimo",
+  "comuneID": 1,
+  "userID": 1
 }
