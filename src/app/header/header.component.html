@@ -1,6 +1,6 @@
 <header class="d-flex flex-row justify-content-around align-items-center">
   <img src="assets/piemonte.png" alt="logo Piemonte" width="50" height="50">
-  <h1>Scopriamo il Piemonte</h1>
+  <h1 class="text-uppercase">Scopriamo il Piemonte</h1>
   <div [ngSwitch]="statoLogin">
     <div *ngSwitchCase="StatoLogin.ospite">
       <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.accesso)">Accedi</button>

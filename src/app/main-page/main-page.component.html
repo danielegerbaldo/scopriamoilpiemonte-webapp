@@ -1,7 +1,7 @@
 <div class="container-fluid mt-2">
   <div class="row">
     <div class="col-auto filterColumn">
-      <button type="button" class="btn filters" [ngClass]="{'noBottom': showFilters}" (click)="toggleFilters()">Filtri</button>
+      <button type="button" class="btn btn-primary" [ngClass]="{'noBottom': showFilters}" (click)="toggleFilters()">Filtri</button>
       <app-filters *ngIf="showFilters"></app-filters>
     </div>
     <div class="col">

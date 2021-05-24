@@ -1,12 +1,12 @@
 nav{
-  background-color: blue;
+  background-color: dimgrey;
   border-width: 2px;
   border-color: black;
   border-style: solid;
 }
 
 nav *{
-  color:azure;
+  color:ghostwhite;
 }
 
 li{
@@ -18,5 +18,6 @@ li{
 }
 
 li:hover{
-  background-color: lightskyblue;
+  background-color: #d3041c;
 }
+.m_title:first-letter {text-transform: uppercase}
