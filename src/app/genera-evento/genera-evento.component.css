@@ -1,21 +1,15 @@
-form{
-  background-color: dodgerblue;
-  max-width: 70%;
-  margin: auto;
-  border-color: black;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 12px;
+.mat-form-field {
+  margin-top: 16px;
+}
+.example-right-align {
+  text-align: right;
 }
 
-input, textarea{
-  background-color: azure;
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
 }
 
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
-}
-
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+input.example-right-align {
+  -moz-appearance: textfield;
 }

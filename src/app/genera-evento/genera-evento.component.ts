@@ -3,13 +3,28 @@ import { Evento } from "../../models/data.model";
 import { EventiService } from "../../services/eventi.service";
 import { UserService } from "../../services/user.service";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-genera-evento',
   templateUrl: './genera-evento.component.html',
-  styleUrls: ['./genera-evento.component.css']
+  styleUrls: ['./genera-evento.component.css'],
+  providers: [{ provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}, multi: true },
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB', multi: true}]
 })
 export class GeneraEventoComponent implements OnInit {
+
+  isLinear = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
+  sixthFormGroup: FormGroup;
+  seventhFormGroup: FormGroup;
+  eighthFormGroup: FormGroup;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -44,9 +59,16 @@ export class GeneraEventoComponent implements OnInit {
   submitted = false;
   posting = false;
 
-  constructor(private eventiService : EventiService, private userService : UserService, private http: HttpClient) { }
+  constructor(private eventiService : EventiService, private userService : UserService, private http: HttpClient, private formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+  }
 
   ngAfterViewInit(){
     if (typeof Microsoft !== 'undefined') {
