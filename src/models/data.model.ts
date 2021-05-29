@@ -15,6 +15,7 @@ export class FiltriEventi{
   prezzoMax: number;
   dataMin: Date;
   dataMax: Date;
+  iscrizioni: boolean;
 }
 
 export class Evento{
@@ -36,7 +37,8 @@ export class Evento{
   latitudine: number;
   longitudine: number;
   proprietario: number;
-  comune: number
+  comune: number;
+  iscritti : number[];
   //tipo: String;
   //tema: String;
   //ricorrenza: String;

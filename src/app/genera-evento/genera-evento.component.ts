@@ -39,7 +39,8 @@ export class GeneraEventoComponent implements OnInit {
     "latitudine": 0,
     "longitudine": 0,
     "proprietario": 1,
-    "comune": 1
+    "comune": 1,
+    "iscritti": []
   };
   submitted = false;
   posting = false;
@@ -65,7 +66,6 @@ export class GeneraEventoComponent implements OnInit {
 
   getCoordinates = (event) => {
     if (event.targetType == "map") {
-      //console.log(this.evento);
       var point = new Microsoft.Maps.Point(event.getX(), event.getY());
       var loc = event.target.tryPixelToLocation(point);
       this.evento.latitudine = loc.latitude;

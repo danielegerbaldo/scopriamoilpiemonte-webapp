@@ -1,13 +1,13 @@
 <div class="d-flex flex-row flex-wrap justify-content-center">
-  <ng-container *ngFor="let ev of listaEventi$ | async">
-    <div *ngIf="!isFiltered(ev)" class="m-2 p-2 evento">
-      <p><b>{{ev.nome}}</b></p>
-      <p>{{ev.descrizione}}</p>
-      <p><b>Posti rimanenti:</b> {{postiRimanenti(ev)}}</p>
-      <p><b>Data:</b> {{ev.data | date}}</p>
-      <p><b>Prezzo:</b> {{ev.prezzo}}</p>
-    </div>
-  </ng-container>
+    <ng-container *ngFor="let ev of listaEventi$ | async">
+      <div *ngIf="!isFiltered(ev)" class="m-2 p-2 evento">
+        <p><b>{{ev.nome}}</b></p>
+        <p>{{ev.descrizione}}</p>
+        <p><b>Posti rimanenti:</b> {{postiRimanenti(ev)}}</p>
+        <p><b>Data:</b> {{ev.data | date}}</p>
+        <p><b>Prezzo:</b> {{ev.prezzo}}</p>
+      </div>
+    </ng-container>
 </div>
 
 <div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">

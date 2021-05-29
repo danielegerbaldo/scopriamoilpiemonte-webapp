@@ -1,12 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { Evento } from '../../../models/data.model';
 import { Observable } from 'rxjs';
 import { EventiService } from "../../../services/eventi.service";
-import {FilterService } from "../../../services/filter.service";
+import { FilterService } from "../../../services/filter.service";
+import { UserService } from "../../../services/user.service";
 import { FiltriEventi } from '../../../models/data.model'
-
-// test
-//import * as templateEvento from '../../../jsonTest/evento.json';
 
 @Component({
   selector: 'app-vista-eventi',
@@ -18,17 +16,23 @@ export class VistaEventiComponent implements OnInit {
   listaEventi$: Observable<Evento[]>;
   windowScrolled: boolean;
   filtri: FiltriEventi;
+  userID : number;
 
-  constructor(private eventiService : EventiService, private filterService : FilterService) {
+  constructor(private eventiService : EventiService, private filterService : FilterService, private userService : UserService) {
   }
 
   ngOnInit(): void {
     this.getFiltri();
-    this.getEventi();
+    this.userService.getUtente().subscribe(
+      utente => {
+        this.userID = utente.userID;
+        this.getEventi();
+      }
+    );
   }
 
   getEventi(){
-    this.listaEventi$ = this.eventiService.getEventi();
+    this.listaEventi$ = this.eventiService.getEventi()
   }
 
   getFiltri(){
@@ -41,11 +45,25 @@ export class VistaEventiComponent implements OnInit {
       if(this.applyAvailabilityFilter(evento) ||
         this.applyMinDateFilter(evento) ||
         this.applyMaxDateFilter(evento) ||
-        this.applyPricefilter(evento)){
+        this.applyPricefilter(evento) ||
+        this.applySubscribeFilter(evento)){
         ret = true;
       }
     }
     return ret;
+  }
+
+  subscribed(evento : Evento) : boolean{
+    var ret = false;
+    if(evento.iscritti.includes(this.userID)){
+      console.log("checkSubscribed");
+      ret = true;
+    }
+    return ret;
+  }
+
+  applySubscribeFilter(evento : Evento){
+    return this.filtri.iscrizioni && !this.subscribed(evento);
   }
 
   applyAvailabilityFilter(evento : Evento) : boolean{
