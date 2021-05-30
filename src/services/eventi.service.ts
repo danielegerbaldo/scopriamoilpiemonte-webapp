@@ -45,6 +45,14 @@ export class EventiService {
     );
   }
 
+  delete(evento : Evento){
+    var url = this.baseUrl + "/deleteById";
+    url = `${url}/${evento.id}`;
+    return this.http.delete(url, this.httpOptions).pipe(
+      catchError(this.handleError<any>('delete'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   

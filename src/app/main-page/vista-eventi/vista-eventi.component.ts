@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Evento } from '../../../models/data.model';
 import { Observable } from 'rxjs';
 import { EventiService } from "../../../services/eventi.service";
@@ -41,6 +41,15 @@ export class VistaEventiComponent implements OnInit {
 
   subscribe(evento : Evento, $event : MouseEvent){
     this.eventiService.subscribe(evento.id, this.userID).subscribe();
+    ($event.target as HTMLButtonElement).disabled = true;
+  }
+
+  isMine(evento : Evento){
+    return evento.proprietario === this.userID;
+  }
+
+  delete(evento : Evento, $event : MouseEvent){
+    this.eventiService.delete(evento).subscribe();
     ($event.target as HTMLButtonElement).disabled = true;
   }
 
