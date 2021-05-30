@@ -39,6 +39,11 @@ export class VistaEventiComponent implements OnInit {
     this.filtri = this.filterService.getFiltri();
   }
 
+  subscribe(evento : Evento, $event : MouseEvent){
+    this.eventiService.subscribe(evento.id, this.userID).subscribe();
+    ($event.target as HTMLButtonElement).disabled = true;
+  }
+
   isFiltered(evento : Evento) : boolean{
     var ret = false;
     if(evento){
@@ -57,7 +62,6 @@ export class VistaEventiComponent implements OnInit {
   subscribed(evento : Evento) : boolean{
     var ret = false;
     if(evento.iscritti.includes(this.userID)){
-      console.log("checkSubscribed");
       ret = true;
     }
     return ret;

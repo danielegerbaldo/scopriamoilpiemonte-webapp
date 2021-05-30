@@ -38,6 +38,13 @@ export class EventiService {
     );
   }
 
+  subscribe(eventoID : number, utenteID : number){
+    const url = this.baseUrl + "/iscrivi";
+    return this.http.post(url, {"evento" : eventoID, "utente": utenteID}, this.httpOptions).pipe(
+      catchError(this.handleError<any>('subscribe'))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   

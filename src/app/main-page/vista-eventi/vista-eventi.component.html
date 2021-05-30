@@ -6,6 +6,9 @@
         <p><b>Posti rimanenti:</b> {{postiRimanenti(ev)}}</p>
         <p><b>Data:</b> {{ev.data | date}}</p>
         <p><b>Prezzo:</b> {{ev.prezzo}}</p>
+        <div *ngIf="!subscribed(ev)">
+          <button type="button" class="btn btn-primary" (click)="subscribe(ev, $event)"> Iscriviti </button>
+        </div>
       </div>
     </ng-container>
 </div>
