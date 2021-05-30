@@ -13,7 +13,8 @@ export class FilterService {
     "prezzoMax": 500,
     "dataMin": new Date(),
     "dataMax": null,
-    "iscrizioni": false 
+    "iscrizioni": false,
+    "noIscrizioni": false
   };
 
   constructor() {}

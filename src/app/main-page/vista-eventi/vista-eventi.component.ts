@@ -46,7 +46,8 @@ export class VistaEventiComponent implements OnInit {
         this.applyMinDateFilter(evento) ||
         this.applyMaxDateFilter(evento) ||
         this.applyPricefilter(evento) ||
-        this.applySubscribeFilter(evento)){
+        this.applySubscribeFilter(evento) ||
+        this.applyUnsubscribedFilter(evento)){
         ret = true;
       }
     }
@@ -64,6 +65,10 @@ export class VistaEventiComponent implements OnInit {
 
   applySubscribeFilter(evento : Evento){
     return this.filtri.iscrizioni && !this.subscribed(evento);
+  }
+
+  applyUnsubscribedFilter(evento : Evento){
+    return this.filtri.noIscrizioni && this.subscribed(evento);
   }
 
   applyAvailabilityFilter(evento : Evento) : boolean{

@@ -16,6 +16,7 @@ export class FiltriEventi{
   dataMin: Date;
   dataMax: Date;
   iscrizioni: boolean;
+  noIscrizioni: boolean;
 }
 
 export class Evento{
