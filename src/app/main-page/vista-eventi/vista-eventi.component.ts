@@ -40,8 +40,17 @@ export class VistaEventiComponent implements OnInit {
   }
 
   subscribe(evento : Evento, $event : MouseEvent){
-    this.eventiService.subscribe(evento.id, this.userID).subscribe();
     ($event.target as HTMLButtonElement).disabled = true;
+    this.eventiService.subscribe(evento.id, this.userID).subscribe(
+      () => console.log("Subscribed to event: " + evento.id)
+    );
+  }
+
+  unsubscribe(evento : Evento, $event : MouseEvent){
+    ($event.target as HTMLButtonElement).disabled = true;
+    this.eventiService.unsubscribe(evento.id, this.userID).subscribe(
+      () => console.log("Unsubscribed from event: " + evento.id)
+    );
   }
 
   isMine(evento : Evento){
@@ -49,8 +58,10 @@ export class VistaEventiComponent implements OnInit {
   }
 
   delete(evento : Evento, $event : MouseEvent){
-    this.eventiService.delete(evento).subscribe();
     ($event.target as HTMLButtonElement).disabled = true;
+    this.eventiService.delete(evento).subscribe(
+      () => console.log("Deleted event: " + evento.id)
+    );
   }
 
   isFiltered(evento : Evento) : boolean{
