@@ -1,30 +1,29 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Evento } from "../../models/data.model";
-import { EventiService } from "../../services/eventi.service";
-import { UserService } from "../../services/user.service";
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { Evento } from '../../models/data.model';
+import { EventiService } from '../../services/eventi.service';
+import { UserService } from '../../services/user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-genera-evento',
   templateUrl: './genera-evento.component.html',
   styleUrls: ['./genera-evento.component.css'],
-  providers: [{ provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}, multi: true },
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB', multi: true}]
+  providers: [{ provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true}}]
 })
 export class GeneraEventoComponent implements OnInit {
 
+  isOptional = true;
   isLinear = true;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  fourthFormGroup: FormGroup;
-  fifthFormGroup: FormGroup;
-  sixthFormGroup: FormGroup;
-  seventhFormGroup: FormGroup;
-  eighthFormGroup: FormGroup;
+  @Input() firstFormGroup: FormGroup;
+  @Input() secondFormGroup: FormGroup;
+  @Input() thirdFormGroup: FormGroup;
+  @Input() fourthFormGroup: FormGroup;
+  @Input() fifthFormGroup: FormGroup;
+  @Input() sixthFormGroup: FormGroup;
+  @Input() seventhFormGroup: FormGroup;
+  @Input() eighthFormGroup: FormGroup;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,40 +32,55 @@ export class GeneraEventoComponent implements OnInit {
   map = null;
   pin = null;
 
-  @ViewChild('myMap') myMap : ElementRef<HTMLDivElement>; // using ViewChild to reference the div instead of setting an id
+  @ViewChild('myMap') myMap: ElementRef<HTMLDivElement>; // using ViewChild to reference the div instead of setting an id
 
   evento: Evento = {
-    "id": null,
-    "nome": "",
-    "descrizione": "",
-    "note": "Created in webapp form",
-    "numMaxPartecipanti": 1000,
-    "partecipantiMin": 0,
-    "partecipanti": 0,
-    "prezzo": 0,
-    "data": null,
-    "streaming": false,
-    "tipoEvento": {
-      "nome": "bo",
-      "descrizione": "bo"
+    'id': null,
+    'nome': '',
+    'descrizione': '',
+    'note': 'Created in webapp form',
+    'numMaxPartecipanti': 1000,
+    'partecipantiMin': 0,
+    'partecipanti': 0,
+    'prezzo': 0,
+    'data': null,
+    'streaming': false,
+    'tipoEvento': {
+      'nome': 'bo',
+      'descrizione': 'bo'
     },
-    "indirizzo": "",
-    "latitudine": 0,
-    "longitudine": 0,
-    "proprietario": 1,
-    "comune": 1
+    'indirizzo': '',
+    'latitudine': 0,
+    'longitudine': 0,
+    'proprietario': 1,
+    'comune': 1
   };
   submitted = false;
   posting = false;
 
-  constructor(private eventiService : EventiService, private userService : UserService, private http: HttpClient, private formBuilder: FormBuilder) { }
-
+  constructor(private eventiService: EventiService, private userService: UserService, private http: HttpClient) { }
   ngOnInit(): void {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+    console.log('Sono qui.');
+    this.firstFormGroup = new FormGroup({
+      firstCtrl: new FormControl(null, Validators.required)
     });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.secondFormGroup = new FormGroup({
+      secondCtrl: new FormControl(null, Validators.required)
+    });
+    this.thirdFormGroup = new FormGroup({
+      thirdCtrl: new FormControl(null)
+    });
+    this.fourthFormGroup = new FormGroup({
+      fourthCtrl: new FormControl(null)
+    });
+    this.fifthFormGroup = new FormGroup({
+      fifthCtrl: new FormControl(null)
+    });
+    this.sixthFormGroup = new FormGroup({
+      sixthCtrl: new FormControl(null, Validators.required)
+    });
+    this.seventhFormGroup = new FormGroup({
+      seventhCtrl: new FormControl(null)
     });
   }
 
@@ -82,11 +96,11 @@ export class GeneraEventoComponent implements OnInit {
       credentials: this.BingMapsAPIKey,
       center: new Microsoft.Maps.Location(45.071222, 7.685090)
     });
-    Microsoft.Maps.Events.addHandler(this.map, "click", this.getCoordinates);
+    Microsoft.Maps.Events.addHandler(this.map, 'click', this.getCoordinates);
   }
 
   getCoordinates = (event) => {
-    if (event.targetType == "map") {
+    if (event.targetType === 'map') {
       //console.log(this.evento);
       var point = new Microsoft.Maps.Point(event.getX(), event.getY());
       var loc = event.target.tryPixelToLocation(point);
@@ -101,7 +115,7 @@ export class GeneraEventoComponent implements OnInit {
     }
   }
 
-  onSubmit = () => { 
+  onSubmit = () => {
     this.posting = true;
     Microsoft.Maps.loadModule(
       'Microsoft.Maps.Search',

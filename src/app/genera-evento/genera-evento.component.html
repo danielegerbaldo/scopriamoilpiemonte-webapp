@@ -1,22 +1,20 @@
 <mat-vertical-stepper #stepper [linear]="isLinear">
-  <form>
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Il nome è obbligatorio">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Nome</ng-template>
-        <mat-form-field>
-          <mat-label>Nome</mat-label>
-          <input [(ngModel)]="evento.nome" matInput placeholder="Nome" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Avanti</button>
-        </div>
-      </form>
-    </mat-step>
-  </form>
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Il nome è obbligatorio">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Nome</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input [(ngModel)]="evento.nome" matInput placeholder="Nome" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step [stepControl]="secondFormGroup" errorMessage="La descrizione è obbligatoria">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Descrizione</ng-template>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Descrizione</mat-label>
         <textarea [(ngModel)]="evento.descrizione" matInput placeholder="Descrizione" formControlName="secondCtrl"
                   required></textarea>
@@ -27,13 +25,12 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="thirdFormGroup">
+  <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
     <form [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>Numero posti limitati</ng-template>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Numero posti limitati</mat-label>
-        <input type="number" [(ngModel)]="evento.numMaxPartecipanti" matInput placeholder="0" min="0" formControlName="thirdCtrl"
-        >
+        <input type="number" [(ngModel)]="evento.numMaxPartecipanti" matInput placeholder="0" min="0" formControlName="thirdCtrl">
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Indietro</button>
@@ -41,10 +38,10 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="fourthFormGroup">
+  <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
     <form [formGroup]="fourthFormGroup">
       <ng-template matStepLabel>Numero minimo di partecipanti</ng-template>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Numero posti</mat-label>
         <input type="number" [(ngModel)]="evento.partecipantiMin" matInput placeholder="0" min="0" formControlName="fourthCtrl"
         >
@@ -55,10 +52,10 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="fifthFormGroup">
+  <mat-step [stepControl]="fifthFormGroup" [optional]="isOptional">
     <form [formGroup]="fifthFormGroup">
       <ng-template matStepLabel>Prezzo</ng-template>
-      <mat-form-field floatLabel="always">
+      <mat-form-field floatLabel="always" appearance="fill">
         <mat-label>Prezzo</mat-label>
         <input type="number" class="example-right-align" [(ngModel)]="evento.prezzo" matInput placeholder="0" formControlName="fifthCtrl"
         >
@@ -86,11 +83,11 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="seventhFormGroup">
+  <mat-step [stepControl]="seventhFormGroup" [optional]="isOptional">
     <form [formGroup]="seventhFormGroup">
       <ng-template matStepLabel>Streaming</ng-template>
       <section class="example-section">
-        <mat-checkbox [(ngModel)]="evento.streaming" class="example-margin">L'evento supporterà lo streaming?</mat-checkbox>
+        <mat-checkbox formControlName="seventhCtrl" [(ngModel)]="evento.streaming">L'evento supporterà lo streaming?</mat-checkbox>
       </section>
       <div>
         <button mat-button matStepperPrevious>Indietro</button>
@@ -98,10 +95,35 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="eighthFormGroup">
-    <form [formGroup]="eighthFormGroup">
+  <mat-step [optional]="isOptional">
+    <form>
+      <ng-template matStepLabel>Tipo evento</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo evento</mat-label>
+        <mat-select>
+            <mat-option>None</mat-option>
+            <mat-option value="option1">Option 1</mat-option>
+            <mat-option value="option2">Option 2</mat-option>
+            <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
       <ng-template matStepLabel>Localizzazione</ng-template>
       <div id='myMap' #myMap style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
+      <!--
+      <div>La tua posizione scelta:<div id="geocode" #geocode></div></div>
+      -->
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
     </form>
   </mat-step>
   <mat-step>
@@ -110,7 +132,9 @@
     <div>
       <button mat-button matStepperPrevious>Indietro</button>
       <button mat-raised-button color="warn" (click)="stepper.reset()">Resetta</button>
+      <!--
       <button mat-raised-button color="primary" (click)="stepper.onsubmit" class="btn btn-success">Termina</button>
+      -->
     </div>
   </mat-step>
 </mat-vertical-stepper>
