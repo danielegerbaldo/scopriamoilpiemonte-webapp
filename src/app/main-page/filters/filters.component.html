@@ -10,6 +10,14 @@
     <label class="ml-2">nascondi eventi pieni</label>
   </div>
   <div class="mt-2">
+    <label for="checkIscrizioni">Mostra solo iscrizioni:</label> <br>
+    <input type="checkbox" #checkIscrizioni name="iscrizioni" [(ngModel)]="filtri.iscrizioni">
+  </div>
+  <div class="mt-2">
+    <label for="checkNoIscrizioni">Non mostrare iscrizioni:</label> <br>
+    <input type="checkbox" #checkNoIscrizioni name="noIscrizioni" [(ngModel)]="filtri.noIscrizioni">
+  </div>
+  <div class="mt-2">
     <label>Prezzo:</label> <br>
     <label for="selettorePrezzoMin">Da:</label> <br>
     <input type="range" id="selettorePrezzoMin" #selettorePrezzoMin name="prezzoMin" min="0" max="500" [(ngModel)]="filtri.prezzoMin"
