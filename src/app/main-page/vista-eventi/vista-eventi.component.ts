@@ -5,6 +5,7 @@ import { EventiService } from "../../../services/eventi.service";
 import { FilterService } from "../../../services/filter.service";
 import { UserService } from "../../../services/user.service";
 import { FiltriEventi } from '../../../models/data.model'
+import { Ruolo } from 'src/models/enums.model';
 
 @Component({
   selector: 'app-vista-eventi',
@@ -17,6 +18,8 @@ export class VistaEventiComponent implements OnInit {
   windowScrolled: boolean;
   filtri: FiltriEventi;
   userID : number;
+  userRole : Ruolo;
+  Ruolo = Ruolo;
 
   constructor(private eventiService : EventiService, private filterService : FilterService, private userService : UserService) {
   }
@@ -26,6 +29,7 @@ export class VistaEventiComponent implements OnInit {
     this.userService.getUtente().subscribe(
       utente => {
         this.userID = utente.userID;
+        this.userRole = utente.ruolo;
         this.getEventi();
       }
     );

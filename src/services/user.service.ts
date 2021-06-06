@@ -9,14 +9,14 @@ import {StatoLogin, Ruolo} from "../models/enums.model";
 export class UserService {
 
   utente: Utente = {
-    "nome": "Elena Piastra",
-    "ruolo": Ruolo.sindaco,
-    "comune": "settimo",
-    "comuneID": 1,
-    "userID": 1
+    "nome": "Ospite",
+    "ruolo": Ruolo.ospite,
+    "comune": "",
+    "comuneID": -1,
+    "userID": -1
   }
 
-  statoLogin: StatoLogin = StatoLogin.effettuato;
+  statoLogin: StatoLogin = StatoLogin.ospite;
 
   utenteChange: Subject<Utente> = new Subject<Utente>();
   statoLoginChange: Subject<StatoLogin> = new Subject<StatoLogin>();
