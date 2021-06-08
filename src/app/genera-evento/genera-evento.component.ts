@@ -16,6 +16,7 @@ export class GeneraEventoComponent implements OnInit {
 
   isOptional = true;
   isLinear = true;
+  panelOpenState = false;
   @Input() firstFormGroup: FormGroup;
   @Input() secondFormGroup: FormGroup;
   @Input() thirdFormGroup: FormGroup;
@@ -60,7 +61,6 @@ export class GeneraEventoComponent implements OnInit {
 
   constructor(private eventiService: EventiService, private userService: UserService, private http: HttpClient) { }
   ngOnInit(): void {
-    console.log('Sono qui.');
     this.firstFormGroup = new FormGroup({
       firstCtrl: new FormControl(null, Validators.required)
     });
@@ -112,14 +112,21 @@ export class GeneraEventoComponent implements OnInit {
       });
       this.map.entities.clear();
       this.map.entities.push(this.pin);
+      this.getAddress();
     }
   }
 
+  getAddress = () => {
+    Microsoft.Maps.loadModule(
+        'Microsoft.Maps.Search',
+        this.loadSearch);
+  }
   onSubmit = () => {
     this.posting = true;
-    Microsoft.Maps.loadModule(
-      'Microsoft.Maps.Search',
-      this.loadSearch);
+    console.log(this.evento);
+    this.eventiService.addEvento(this.evento).subscribe(
+        () => this.submitted = true
+    )
   }
 
   loadSearch = () => {
@@ -138,9 +145,6 @@ export class GeneraEventoComponent implements OnInit {
     //console.log(r);
     this.evento.indirizzo = r.address.addressLine;
     // this.evento.comune = r.address.locality
-    console.log(this.evento);
-    this.eventiService.addEvento(this.evento).subscribe(
-      () => this.submitted = true
-    )
+    document.getElementById('geocode').innerHTML = this.evento.indirizzo;
   }
 }

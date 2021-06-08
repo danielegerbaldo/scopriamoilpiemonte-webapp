@@ -117,9 +117,7 @@
     <form>
       <ng-template matStepLabel>Localizzazione</ng-template>
       <div id='myMap' #myMap style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
-      <!--
       <div>La tua posizione scelta:<div id="geocode" #geocode></div></div>
-      -->
       <div>
         <button mat-button matStepperPrevious>Indietro</button>
         <button mat-button matStepperNext>Avanti</button>
@@ -128,13 +126,28 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Fine</ng-template>
-    <p>Hai finito..</p>
+    <p>Stai per terminare</p>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Clicca qui per verificare i tuoi dati.
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Nome: {{evento.nome}}</p>
+      <p>Descrizione: {{evento.descrizione}}</p>
+      <p>Nr. massimo partecipanti: {{evento.numMaxPartecipanti}}</p>
+      <p>Nr. minimo partecipanti: {{evento.partecipantiMin}}</p>
+      <p>Prezzo: {{evento.prezzo}} €</p>
+      <p>Data: {{evento.data}}</p>
+      <p>Streaming: {{evento.streaming ? 'Sì' : 'No'}}</p>
+      <p>Tipo evento: {{evento.tipoEvento}}</p>
+      <p>Indirizzo: {{evento.indirizzo}}</p>
+    </mat-expansion-panel>
     <div>
       <button mat-button matStepperPrevious>Indietro</button>
       <button mat-raised-button color="warn" (click)="stepper.reset()">Resetta</button>
-      <!--
-      <button mat-raised-button color="primary" (click)="stepper.onsubmit" class="btn btn-success">Termina</button>
-      -->
+      <button mat-raised-button color="primary" (click)="onSubmit()" class="btn btn-success">Termina</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
