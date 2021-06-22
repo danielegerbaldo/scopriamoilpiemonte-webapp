@@ -1,80 +1,153 @@
-<div [hidden]="submitted">
-  <form class="form-horizontal mt-3 p-3" (ngSubmit)="onSubmit()" #creaEvento="ngForm">
-    <h2 class="text-center">Crea evento</h2>
-    <div class="form-group">
-      <label class="control-label" for="nome">nome: </label>
-      <input class="form-control" type="text" id="nome" required 
-        [(ngModel)]="evento.nome" name="nome">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="descrizione">descrizione: </label>
-      <textarea class="form-control" id="descrizione" 
-        [(ngModel)]="evento.descrizione" name="descrizione"></textarea>
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="numPosti">numero posti: </label>
-      <input class="form-control" type="number" id="numPosti" required 
-        [(ngModel)]="evento.numMaxPartecipanti" name="numero posti" min="0" oninput="validity.valid||(value='');">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="minPartecipanti">numero minimo di partecipanti: </label>
-      <input class="form-control" type="number" id="minPartecipanti" 
-        [(ngModel)]="evento.partecipantiMin" name="numero minimo partecipanti"
-        min="0" oninput="validity.valid||(value='');">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="prezzo">prezzo (€): </label>
-      <input class="form-control" type="number" id="prezzo" 
-        [(ngModel)]="evento.prezzo" name="prezzo"
-        min="0" step="0.01" oninput="validity.valid||(value='');">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="data">data: </label>
-      <input class="form-control" type="date" id="data" required
-        [(ngModel)]="evento.data" name="data">
-    </div>
-    <div class="form-check form-group">
-      <label class="form-check-label" for="streaming"> 
-        <input class="form-check-input" type="checkbox" id="streaming"
-        [(ngModel)]="evento.streaming" name="streaming">
-        l'evento supporterà lo streaming?
-      </label>
-    </div>
-    <!-- <div class="form-group">
-      Tipo:
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="tipo" id="ricorrente" value="ricorrente" [(ngModel)]="evento.tipo">
-        <label class="form-check-label" for="ricorrente"> ricorrente</label>
+<mat-vertical-stepper #stepper [linear]="isLinear">
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Il nome è obbligatorio">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Nome</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input (change)="updateNome()" matInput placeholder="Nome" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Avanti</button>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="tipo" id="occasionale" value="occasionale" [(ngModel)]="evento.tipo">
-        <label class="form-check-label" for="occasionale"> occasionale</label>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="La descrizione è obbligatoria">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Descrizione</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Descrizione</mat-label>
+        <textarea (change)="updateDescrizione()" matInput placeholder="Descrizione" formControlName="secondCtrl"
+                  required></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="tema">tema: </label>
-      <input class="form-control" type="text" id="tema" placeholder="Ad esempio: fiera, mercato..." 
-        [(ngModel)]="evento.tema" name="tema">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="ricorrenza">ricorrenza: </label>
-      <input class="form-control" type="text" id="tema" placeholder="Ad esempio: Natale, Festa patronale..." 
-        [(ngModel)]="evento.ricorrenza" name="ricorrenza">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="immagine">seleziona un'immagine: </label>
-      <input class="form-control" type="file" id="immagine" 
-        [(ngModel)]="evento.immagine" name="immagine">
-    </div> -->
-    <div class="form-group">
-      <label class="control-label" for="coordinate">seleziona dove si terrà l'evento: </label>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Numero posti limitati</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Numero posti limitati</mat-label>
+        <input type="number" (change)="updateNumMaxPartecipanti()" matInput placeholder="0" min="0" formControlName="thirdCtrl">
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Numero minimo di partecipanti</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Numero posti</mat-label>
+        <input type="number" (change)="updatePartecipantiMin()" matInput placeholder="0" min="0" formControlName="fourthCtrl"
+        >
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="fifthFormGroup" [optional]="isOptional">
+    <form [formGroup]="fifthFormGroup">
+      <ng-template matStepLabel>Prezzo</ng-template>
+      <mat-form-field floatLabel="always" appearance="fill">
+        <mat-label>Prezzo</mat-label>
+        <input type="number" class="example-right-align" (change)="updatePrezzo()" matInput placeholder="0" formControlName="fifthCtrl"
+        >
+        <span matPrefix>€&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="sixthFormGroup" errorMessage="La data è obbligatoria">
+    <form [formGroup]="sixthFormGroup">
+      <ng-template matStepLabel>Data</ng-template>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Scegli la data</mat-label>
+        <input (change)="updateData()" matInput placeholder="MM/GG/AAAA" [matDatepicker]="picker" formControlName="sixthCtrl" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="seventhFormGroup" [optional]="isOptional">
+    <form [formGroup]="seventhFormGroup">
+      <ng-template matStepLabel>Streaming</ng-template>
+      <section class="example-section">
+        <mat-checkbox formControlName="seventhCtrl" (change)="updateStreaming()">L'evento supporterà lo streaming?</mat-checkbox>
+      </section>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [optional]="isOptional">
+    <form>
+      <ng-template matStepLabel>Tipo evento</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo evento</mat-label>
+        <mat-select>
+          <mat-option>None</mat-option>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Localizzazione</ng-template>
       <div id='myMap' #myMap style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
+      <div>La tua posizione scelta:<div id="geocode" #geocode></div></div>
+      <div>
+        <button mat-button matStepperPrevious>Indietro</button>
+        <button mat-button matStepperNext>Avanti</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Fine</ng-template>
+    <p>Stai per terminare</p>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Clicca qui per verificare i tuoi dati.
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Nome: {{evento.nome}}</p>
+      <p>Descrizione: {{evento.descrizione}}</p>
+      <p>Nr. massimo partecipanti: {{evento.numMaxPartecipanti}}</p>
+      <p>Nr. minimo partecipanti: {{evento.partecipantiMin}}</p>
+      <p>Prezzo: {{evento.prezzo}} €</p>
+      <p>Data: {{evento.data}}</p>
+      <p>Streaming: {{evento.streaming ? 'Sì' : 'No'}}</p>
+      <p>Tipo evento: {{evento.tipoEvento}}</p>
+      <p>Indirizzo: {{evento.indirizzo}}</p>
+    </mat-expansion-panel>
+    <div>
+      <button mat-button matStepperPrevious>Indietro</button>
+      <button mat-raised-button color="warn" (click)="stepper.reset()">Resetta</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" class="btn btn-success">Termina</button>
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-success" [disabled]="!creaEvento.form.valid || evento.latitudine == 0 || evento.longitudine == 0 || posting">Conferma</button>
-    </div>
-  </form>
-</div>
-<div class="text-center mt-5" [hidden]="!submitted">
-  <h2>Evento creato con successo!</h2>
-</div>
+  </mat-step>
+</mat-vertical-stepper>
