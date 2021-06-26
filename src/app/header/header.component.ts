@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
   logOut(){
     var u: Utente = {
       "nome": "",
+      "cognome": "",
       "ruolo": Ruolo.ospite,
       "comune": "",
       "comuneID": 0,
