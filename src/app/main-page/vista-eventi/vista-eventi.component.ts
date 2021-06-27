@@ -46,14 +46,22 @@ export class VistaEventiComponent implements OnInit {
   subscribe(evento : Evento, $event : MouseEvent){
     ($event.target as HTMLButtonElement).disabled = true;
     this.eventiService.subscribe(evento.id, this.userID).subscribe(
-      () => console.log("Subscribed to event: " + evento.id)
+      () => {
+        console.log("Subscribed to event: " + evento.id);
+        this.listaEventi$ = null;
+        this.getEventi();
+      }
     );
   }
 
   unsubscribe(evento : Evento, $event : MouseEvent){
     ($event.target as HTMLButtonElement).disabled = true;
     this.eventiService.unsubscribe(evento.id, this.userID).subscribe(
-      () => console.log("Unsubscribed from event: " + evento.id)
+      () => {
+        console.log("Unsubscribed from event: " + evento.id);
+        this.listaEventi$ = null;
+        this.getEventi();
+      }
     );
   }
 
@@ -64,7 +72,11 @@ export class VistaEventiComponent implements OnInit {
   delete(evento : Evento, $event : MouseEvent){
     ($event.target as HTMLButtonElement).disabled = true;
     this.eventiService.delete(evento).subscribe(
-      () => console.log("Deleted event: " + evento.id)
+      () => {
+        console.log("Deleted event: " + evento.id);
+        this.listaEventi$ = null;
+        this.getEventi();
+      }
     );
   }
 
