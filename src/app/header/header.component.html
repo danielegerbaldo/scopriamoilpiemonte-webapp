@@ -7,10 +7,10 @@
       <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.registrazione)">Registrati</button>
     </div>
     <div *ngSwitchCase="StatoLogin.registrazione">
-      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.ospite)">Indietro</button>
+      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.ospite)">Home</button>
     </div>
     <div *ngSwitchCase="StatoLogin.accesso">
-      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.ospite)">Indietro</button>
+      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.ospite)">Home</button>
     </div>
     <div *ngSwitchCase="StatoLogin.effettuato" class="d-flex flex-row justify-content-start align-items-center">
       <!-- aggiungere un'immagine -->

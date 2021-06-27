@@ -4,7 +4,6 @@ import { Ruolo, StatoLogin, Pagina } from "../../models/enums.model"
 import { Utente } from "../../models/data.model";
 import { UserService } from "../../services/user.service"
 import { TokenStorageService } from "../../services/token-storage.service"
-import { noop } from 'angular';
 
 @Component({
   selector: 'app-login',
@@ -51,12 +50,13 @@ export class LoginComponent implements OnInit {
     this.userService.downloadInfoUtente(id).subscribe(
       utente => {
         var ruolo = this.assignRuolo(utente.ruoli);
+        console.log(utente);
         var u: Utente = {
           "nome": utente.nome,
           "cognome": utente.cognome,
           "ruolo": ruolo,
-          "comune": "",
-          "comuneID": utente.dipendenteDiComune,
+          "comuneResidenzaID": utente.comuneResidenza.istat,
+          "comuneDipendenteID": utente.dipendenteDiComune.istat,
           "userID": id
         }
         this.userService.setUtente(u);

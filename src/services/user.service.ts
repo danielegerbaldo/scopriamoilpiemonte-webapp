@@ -14,8 +14,8 @@ export class UserService {
     "nome": "Ospite",
     "cognome": "",
     "ruolo": Ruolo.ospite,
-    "comune": "",
-    "comuneID": -1,
+    "comuneResidenzaID": -1,
+    "comuneDipendenteID": -1,
     "userID": -1
   }
 
@@ -41,8 +41,7 @@ export class UserService {
   }
 
   downloadInfoUtente(id : number){
-    //var url = this.baseUrl + "utente-composed/info-utente";
-    var url = this.baseUrl + "utente/getUser";
+    var url = this.baseUrl + "utente-composed/info-utente";
     url = `${url}/${id}`;
     return this.http.get(url, this.httpOptions).pipe(
       catchError(this.handleError<any>('info utente'))
