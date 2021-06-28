@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class TokenStorageService {
 
-  token : String = null;
+  token : string = null;
 
   constructor() { }
 
@@ -13,7 +13,7 @@ export class TokenStorageService {
     return this.token;
   }
 
-  setToken(tok : String){
+  setToken(tok : string){
     this.token = tok;
   }
 

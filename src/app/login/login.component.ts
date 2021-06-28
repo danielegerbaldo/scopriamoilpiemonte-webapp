@@ -62,7 +62,9 @@ export class LoginComponent implements OnInit {
         this.userService.setUtente(u);
         this.userService.setStatoLogin(StatoLogin.effettuato);
         this.pageEmitter.emit(Pagina.eventi);
-        console.log("login OK")
+        console.log("login OK");
+        sessionStorage.setItem('token', this.tokenService.getToken());
+        sessionStorage.setItem('user', JSON.stringify(u));
       },
       err => this.sending = false
     );

@@ -4,6 +4,7 @@ import { StatoLogin, Pagina } from "../models/enums.model";
 import { Utente } from "../models/data.model";
 import { UserService } from "../services/user.service"
 import { BingMapsLoader } from '../services/map-loader.service';
+import { TokenStorageService } from 'src/services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit{
 
   mapReady = false;
 
-  constructor(private userService: UserService){
+  constructor(private userService: UserService, private tokenService : TokenStorageService){
     this.userService.utenteChange.subscribe(utente => this.utente = utente);
     this.userService.statoLoginChange.subscribe(statoLogin => this.statoLogin = statoLogin);
 
@@ -33,6 +34,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(){
+    var token = sessionStorage.getItem('token');
+    var user = sessionStorage.getItem('user');
+    if(token !== null && user !== null){
+      this.tokenService.setToken(token);
+      this.userService.setUtente(JSON.parse(sessionStorage.getItem('user')) as Utente);
+    }
     this.getUtente();
     this.getStatoLogin();
   }
