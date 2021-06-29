@@ -39,6 +39,7 @@ export class AppComponent implements OnInit{
     if(token !== null && user !== null){
       this.tokenService.setToken(token);
       this.userService.setUtente(JSON.parse(sessionStorage.getItem('user')) as Utente);
+      this.userService.setStatoLogin(StatoLogin.effettuato);
     }
     this.getUtente();
     this.getStatoLogin();

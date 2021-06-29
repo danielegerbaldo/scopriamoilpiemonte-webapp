@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
     this.userService.setUtente(u);
     this.changeLoginStatus(StatoLogin.accesso);
     this.tokenService.clearToken();
+    sessionStorage.clear();
   }
 
 }

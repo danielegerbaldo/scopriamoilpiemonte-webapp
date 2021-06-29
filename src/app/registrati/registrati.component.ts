@@ -65,7 +65,10 @@ export class RegistratiComponent implements OnInit {
         this.userService.setUtente(u);
         this.userService.setStatoLogin(StatoLogin.effettuato);  
       },
-      err => this.failedSubmit = true
+      err => {
+        this.failedSubmit = true;
+        this.submitting = false;
+      }
     );
   }
 
