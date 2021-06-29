@@ -18,6 +18,7 @@ import { MappaComponent } from './mappa/mappa.component';
 import { GeneraEventoComponent } from './genera-evento/genera-evento.component';
 import { EventiService } from 'src/services/eventi.service';
 import { AuthInterceptor } from 'src/services/interceptor';
+import { ProfiloComponent } from './profilo/profilo.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AuthInterceptor } from 'src/services/interceptor';
     FiltersComponent,
     VistaEventiComponent,
     MappaComponent,
-    GeneraEventoComponent
+    GeneraEventoComponent,
+    ProfiloComponent
   ],
     imports: [
         BrowserModule,

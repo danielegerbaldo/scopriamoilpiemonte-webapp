@@ -16,5 +16,6 @@ export enum Pagina{
   eventi,
   mappa,
   creaevento,
-  creasondaggio
+  creasondaggio,
+  profilo
 }
