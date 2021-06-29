@@ -2,31 +2,71 @@
   <h1>REGISTRAZIONE</h1>
   <h2>Compila i seguenti campi</h2>
   <div class="form-group">
-    <label class="control-label" for="nome">Inserire il tuo nome: </label>
+    <label class="control-label" for="nome">Inserisci il tuo nome: </label>
     <input class="form-control" type="text" id="nome" required 
       [(ngModel)]="nome" name="nome" placeholder="Nome Utente">
   </div>
   <div class="form-group">
-    <label class="control-label" for="email">Inserire l'email: </label>
+    <label class="control-label" for="cognome">Inserisci il tuo cognome: </label>
+    <input class="form-control" type="text" id="cognome" required 
+      [(ngModel)]="cognome" name="nome" placeholder="Cognome Utente">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="cf">Inserisci il tuo codice fiscale: </label>
+    <input class="form-control" type="text" id="cf" 
+      [(ngModel)]="codiceFiscale" name="nome" placeholder="Codice Fiscale">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="telefono">Inserisci il tuo numero di telefono: </label>
+    <input class="form-control" type="text" id="telefono" 
+      [(ngModel)]="telefono" name="telefono" placeholder="Numero di telefono">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="ruolo">Scegli il tuo ruolo: </label>
+    <select name="ruolo" [(ngModel)]="ruolo" id="ruolo" required>
+      <option [value]="ruoloEnum.base"> base </option>
+      <option [value]="ruoloEnum.collaboratore"> collaboratore </option>
+      <option [value]="ruoloEnum.sindaco"> sindaco </option>
+    </select>
+  </div>
+  <div *ngIf="comuni$ !== null">
+    <div class="form-group">
+      <label class="control-label" for="residenza">Scegli il tuo comune di residenza: </label>
+      <select name="residenza" [(ngModel)]="comuneResidenza" id="residenza" required>
+        <option *ngFor="let c of comuni$ | async" [value]="c.istat"> {{c.nome}} </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="dipendente">Scegli il tuo comune di lavoro: </label>
+      <select name="dipendente" [(ngModel)]="comuneDipendente" id="dipendente" required>
+        <option *ngFor="let c of comuni$ | async" [value]="c.istat"> {{c.nome}} </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="email">Inserisci l'email: </label>
     <input class="form-control" type="email" id="email" required 
       [(ngModel)]="email" name="email" placeholder="Indirizzo Email">
   </div>
   <div class="form-group">
-    <label class="control-label" for="pass1">Inserire la password: </label>
+    <label class="control-label" for="pass1">Inserisci la password: </label>
     <input class="form-control" type="password" id="pass1" required 
       [(ngModel)]="pw1" name="pass1" placeholder="Password">
   </div>
   <div class="form-group">
-    <label class="control-label" for="pass2">Confermare la password: </label>
+    <label class="control-label" for="pass2">Conferma la password: </label>
     <input class="form-control" type="password" id="pass2" required 
       [(ngModel)]="pw2" name="pass2" placeholder="Confermare la password">
     <div class="erroreAccesso" *ngIf="passwordDiverse()">
       le due password non corrispondono!
     </div>
   </div>
+  <div class="erroreAccesso" *ngIf="failedSubmit">
+    Registrazione non riuscita
+  </div>
   <div class="form-group">
     <div class="submit">
-      <button type="submit" class="btn btn-success" [disabled]="!registrazione.form.valid || passwordDiverse()">Registrati</button>
+      <button type="submit" class="btn btn-success" [disabled]="!registrazione.form.valid || passwordDiverse() || submitting">Registrati</button>
     </div>
   </div>
 

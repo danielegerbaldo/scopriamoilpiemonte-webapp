@@ -48,6 +48,55 @@ export class UserService {
     );
   }
 
+  signup(
+    email : String,
+    password : String,
+    nome : String,
+    cognome : String,
+    codiceFiscale : String,
+    telefono : String,
+    comuneResidenzaID : number,
+    comuneDipendenteID : number,
+    ruolo : Ruolo
+  ){
+    var ruoloArr = this.ruoloConverter(ruolo);
+    return this.http.post(this.baseUrl + "signUp",
+      {
+        "email": email,
+        "password": password,
+        "nome": nome,
+        "cognome": cognome,
+        "cf": codiceFiscale,
+        "telefono": telefono,
+        "comuneResidenza": comuneResidenzaID,
+        "dipendenteDiComune": comuneDipendenteID,
+        "roles": ruoloArr
+      },
+      this.httpOptions).pipe(
+      catchError(this.handleError<any>('login'))
+    );
+  }
+
+  ruoloConverter(ruolo : Ruolo) : String[]{
+    var ret = [];
+    switch(ruolo){
+      case Ruolo.collaboratore:
+        console.log("signup: collaboratore");
+        ret.push("ROLE_PUBLISHER");
+        break;
+      case Ruolo.sindaco:
+        console.log("signup: sindaco");
+        ret.push("ROLE_MAYOR");
+        ret.push("ROLE_ADMIN");
+        break;
+      default:
+        console.log("signup: base");
+        ret.push("ROLE_CLIENT");
+        break;
+    }
+    return ret;
+  }
+
   getUtente(): Observable<Utente>{
     return of(this.utente);
   }
