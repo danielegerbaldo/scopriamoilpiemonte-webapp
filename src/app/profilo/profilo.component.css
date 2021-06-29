@@ -1,0 +1,9 @@
+.parent{
+  background-color: dodgerblue;
+  max-width: 70%;
+  margin: auto;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 12px;
+}

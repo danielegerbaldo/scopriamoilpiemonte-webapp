@@ -7,7 +7,7 @@ export enum StatoLogin{
 
 export enum Ruolo{
   ospite = "ospite",
-  base = "",
+  base = "base",
   collaboratore = "collaboratore",
   sindaco = "sindaco"
 }
@@ -16,5 +16,6 @@ export enum Pagina{
   eventi,
   mappa,
   creaevento,
-  creasondaggio
+  creasondaggio,
+  profilo
 }

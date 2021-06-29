@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Ruolo, StatoLogin} from "../../models/enums.model"
 import { Utente } from "../../models/data.model";
 import { UserService } from "../../services/user.service"
+import { TokenStorageService } from "../../services/token-storage.service"
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
   statoLogin: StatoLogin;
   utente: Utente;
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService, private tokenService : TokenStorageService) { 
     this.userService.utenteChange.subscribe(utente => this.utente = utente);
     this.userService.statoLoginChange.subscribe(statoLogin => this.statoLogin = statoLogin);
   }
@@ -40,12 +41,16 @@ export class HeaderComponent implements OnInit {
   logOut(){
     var u: Utente = {
       "nome": "",
+      "cognome": "",
       "ruolo": Ruolo.ospite,
-      "comune": "",
-      "comuneID": 0,
-      "userID": 0
+      "comuneResidenzaID": -1,
+      "comuneDipendenteID": -1,
+      "userID": -1
     }
     this.userService.setUtente(u);
+    this.changeLoginStatus(StatoLogin.accesso);
+    this.tokenService.clearToken();
+    sessionStorage.clear();
   }
 
 }

@@ -6,14 +6,16 @@
         <p><b>Posti rimanenti:</b> {{postiRimanenti(ev)}}</p>
         <p><b>Data:</b> {{ev.data | date}}</p>
         <p><b>Prezzo:</b> {{ev.prezzo}}</p>
-        <div *ngIf="subscribed(ev); else subscribedBlock">
-          <button type="button" class="btn btn-primary" (click)="unsubscribe(ev, $event)"> Annulla iscrizione </button>
-        </div>
-        <ng-template #subscribedBlock>
-          <button type="button" class="btn btn-primary" (click)="subscribe(ev, $event)"> Iscriviti </button>
-        </ng-template>
-        <div *ngIf="isMine(ev)" class="mt-1">
-          <button type="button" class="btn btn-danger" (click)="delete(ev, $event)"> Elimina </button>
+        <div *ngIf="userRole !== Ruolo.ospite">
+          <div *ngIf="subscribed(ev); else subscribedBlock">
+            <button type="button" class="btn btn-primary" (click)="unsubscribe(ev, $event)"> Annulla iscrizione </button>
+          </div>
+          <ng-template #subscribedBlock>
+            <button type="button" class="btn btn-primary" (click)="subscribe(ev, $event)"> Iscriviti </button>
+          </ng-template>
+          <div *ngIf="isMine(ev)" class="mt-1">
+            <button type="button" class="btn btn-danger" (click)="delete(ev, $event)"> Elimina </button>
+          </div>
         </div>
       </div>
     </ng-container>

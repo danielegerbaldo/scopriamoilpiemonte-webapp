@@ -11,9 +11,10 @@ export class NavbarComponent implements OnInit, OnChanges {
 
   @Input() ruoloUtente: Ruolo;
   elementi: String[];
-  elementi_ospite = ["eventi", "mappa"]
-  elementi_sindaco = ["crea evento", "crea sondaggio", "da confermare"];
-  elementi_collaboratore = ["crea evento", "crea sondaggio"];
+  elementi_ospite = ["eventi", "mappa"];
+  elementi_base = ["profilo"]
+  elementi_sindaco = ["crea evento", "crea sondaggio", "da confermare", "profilo"];
+  elementi_collaboratore = ["crea evento", "crea sondaggio", "profilo"];
   @Output() pageEmitter = new EventEmitter<Pagina>();
 
   constructor() {}
@@ -28,9 +29,9 @@ export class NavbarComponent implements OnInit, OnChanges {
 
   private setElementi(){
     this.elementi = this.elementi_ospite;
-    /*if(this.ruoloUtente === Ruolo.base){
-      nothing more than guest
-    }*/
+    if(this.ruoloUtente === Ruolo.base){
+      this.elementi = this.elementi.concat(this.elementi_base);
+    }
     if(this.ruoloUtente === Ruolo.collaboratore){
       this.elementi = this.elementi.concat(this.elementi_collaboratore);
     }

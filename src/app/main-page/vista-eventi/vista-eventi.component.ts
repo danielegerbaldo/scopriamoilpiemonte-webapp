@@ -5,6 +5,7 @@ import { EventiService } from "../../../services/eventi.service";
 import { FilterService } from "../../../services/filter.service";
 import { UserService } from "../../../services/user.service";
 import { FiltriEventi } from '../../../models/data.model'
+import { Ruolo } from 'src/models/enums.model';
 
 @Component({
   selector: 'app-vista-eventi',
@@ -17,6 +18,8 @@ export class VistaEventiComponent implements OnInit {
   windowScrolled: boolean;
   filtri: FiltriEventi;
   userID : number;
+  userRole : Ruolo;
+  Ruolo = Ruolo;
 
   constructor(private eventiService : EventiService, private filterService : FilterService, private userService : UserService) {
   }
@@ -26,6 +29,7 @@ export class VistaEventiComponent implements OnInit {
     this.userService.getUtente().subscribe(
       utente => {
         this.userID = utente.userID;
+        this.userRole = utente.ruolo;
         this.getEventi();
       }
     );
@@ -42,14 +46,22 @@ export class VistaEventiComponent implements OnInit {
   subscribe(evento : Evento, $event : MouseEvent){
     ($event.target as HTMLButtonElement).disabled = true;
     this.eventiService.subscribe(evento.id, this.userID).subscribe(
-      () => console.log("Subscribed to event: " + evento.id)
+      () => {
+        console.log("Subscribed to event: " + evento.id);
+        this.listaEventi$ = null;
+        this.getEventi();
+      }
     );
   }
 
   unsubscribe(evento : Evento, $event : MouseEvent){
     ($event.target as HTMLButtonElement).disabled = true;
     this.eventiService.unsubscribe(evento.id, this.userID).subscribe(
-      () => console.log("Unsubscribed from event: " + evento.id)
+      () => {
+        console.log("Unsubscribed from event: " + evento.id);
+        this.listaEventi$ = null;
+        this.getEventi();
+      }
     );
   }
 
@@ -60,7 +72,11 @@ export class VistaEventiComponent implements OnInit {
   delete(evento : Evento, $event : MouseEvent){
     ($event.target as HTMLButtonElement).disabled = true;
     this.eventiService.delete(evento).subscribe(
-      () => console.log("Deleted event: " + evento.id)
+      () => {
+        console.log("Deleted event: " + evento.id);
+        this.listaEventi$ = null;
+        this.getEventi();
+      }
     );
   }
 

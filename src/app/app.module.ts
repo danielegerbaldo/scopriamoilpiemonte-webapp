@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import { UserService } from '../services/user.service';
 import { MappaComponent } from './mappa/mappa.component';
 import { GeneraEventoComponent } from './genera-evento/genera-evento.component';
 import { EventiService } from 'src/services/eventi.service';
+import { AuthInterceptor } from 'src/services/interceptor';
+import { ProfiloComponent } from './profilo/profilo.component';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { EventiService } from 'src/services/eventi.service';
     FiltersComponent,
     VistaEventiComponent,
     MappaComponent,
-    GeneraEventoComponent
+    GeneraEventoComponent,
+    ProfiloComponent
   ],
     imports: [
         BrowserModule,
@@ -41,7 +44,12 @@ import { EventiService } from 'src/services/eventi.service';
   providers: [
     FilterService,
     UserService,
-    EventiService
+    EventiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

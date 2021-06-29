@@ -2,9 +2,10 @@ import { Ruolo } from "./enums.model";
 
 export class Utente{
   nome: String;
+  cognome: String;
   ruolo: Ruolo;
-  comune: String;
-  comuneID: number;
+  comuneResidenzaID: number;
+  comuneDipendenteID: number;
   userID: number;
 }
 

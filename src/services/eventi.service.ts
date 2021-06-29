@@ -33,7 +33,7 @@ export class EventiService {
   /** POST: add a new hero to the server */
   addEvento(evento: Evento): Observable<Evento> {
     return this.http.post<Evento>(this.baseUrl, evento, this.httpOptions).pipe(
-      tap((newEvento: Evento) => console.log(`added hero w/ id=${newEvento.id}`)),
+      tap((newEvento: Evento) => console.log(`added event w/ id=${newEvento.id}`)),
       catchError(this.handleError<Evento>('addHero'))
     );
   }
