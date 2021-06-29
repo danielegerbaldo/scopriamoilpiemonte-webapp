@@ -97,6 +97,20 @@ export class UserService {
     return ret;
   }
 
+  assignRuolo(ruoliArr){
+    var ruolo = Ruolo.base;
+    if(ruoliArr.includes("ROLE_ADMIN") || ruoliArr.includes("ROLE_MAYOR")){
+      ruolo = Ruolo.sindaco;
+    }
+    else if(ruoliArr.includes("ROLE_PUBLISHER")){
+      ruolo = Ruolo.collaboratore;
+    }
+    else if(ruoliArr.includes("ROLE_CLIENT")){
+      ruolo = Ruolo.base;
+    }
+    return ruolo;
+  }
+
   getUtente(): Observable<Utente>{
     return of(this.utente);
   }

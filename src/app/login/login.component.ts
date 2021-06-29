@@ -49,8 +49,7 @@ export class LoginComponent implements OnInit {
   updateUtente = (id : number) => {
     this.userService.downloadInfoUtente(id).subscribe(
       utente => {
-        var ruolo = this.assignRuolo(utente.ruoli);
-        console.log(utente);
+        var ruolo = this.userService.assignRuolo(utente.ruoli);
         var u: Utente = {
           "nome": utente.nome,
           "cognome": utente.cognome,
@@ -68,14 +67,6 @@ export class LoginComponent implements OnInit {
       },
       err => this.sending = false
     );
-  }
-
-  assignRuolo(ruoliArr){
-    var ruolo = Ruolo.base;
-    if(ruoliArr.includes("ROLE_ADMIN")){
-      ruolo = Ruolo.sindaco;
-    }
-    return ruolo;
   }
 
 }
