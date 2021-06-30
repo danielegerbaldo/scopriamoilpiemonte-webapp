@@ -28,6 +28,12 @@
     <div *ngIf="provinciaComuneResidenza !== null && provinciaComuneResidenza !== ''">
       <p> <b>Provincia: </b> {{provinciaComuneResidenza}} </p>
     </div>
+    <div *ngIf="latitudineResidenza !== null">
+      <p> <b>Latitudine: </b> {{latitudineResidenza}} </p>
+    </div>
+    <div *ngIf="longitudineResidenza !== null">
+      <p> <b>Longitudine: </b> {{longitudineResidenza}} </p>
+    </div>
   </div>
   <div>
     <h2> Comune di lavoro </h2>
@@ -36,6 +42,12 @@
     </div>
     <div *ngIf="provinciaComuneDipendente !== null && provinciaComuneDipendente !== ''">
       <p> <b>Provincia: </b> {{provinciaComuneDipendente}} </p>
+    </div>
+    <div *ngIf="latitudineDipendente !== null">
+      <p> <b>Latitudine: </b> {{latitudineDipendente}} </p>
+    </div>
+    <div *ngIf="longitudineDipendente !== null">
+      <p> <b>Longitudine: </b> {{longitudineDipendente}} </p>
     </div>
   </div>
 </div>
