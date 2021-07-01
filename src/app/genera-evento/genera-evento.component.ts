@@ -3,6 +3,7 @@ import { Evento } from "../../models/data.model";
 import { EventiService } from "../../services/eventi.service";
 import { UserService } from "../../services/user.service";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MunicipalityService } from 'src/services/municipality.service';
 
 @Component({
   selector: 'app-genera-evento',
@@ -39,13 +40,17 @@ export class GeneraEventoComponent implements OnInit {
     "latitudine": 0,
     "longitudine": 0,
     "proprietario": 1,
-    "comune": 1,
+    "comune": 1001,
     "iscritti": []
   };
   submitted = false;
   posting = false;
 
-  constructor(private eventiService : EventiService, private userService : UserService, private http: HttpClient) { }
+  constructor(
+    private eventiService : EventiService,
+    private userService : UserService,
+    private http: HttpClient,
+    private municipalityService : MunicipalityService) { }
 
   ngOnInit(): void {}
 
@@ -99,12 +104,14 @@ export class GeneraEventoComponent implements OnInit {
   }
 
   searchCallback = (r) => {
-    //console.log(r);
     this.evento.indirizzo = r.address.addressLine;
-    // this.evento.comune = r.address.locality
-    console.log(this.evento);
-    this.eventiService.addEvento(this.evento).subscribe(
-      () => this.submitted = true
+    this.municipalityService.getByName(r.address.locality).subscribe(
+      comune => {
+        this.evento.comune = comune.istat;
+        this.eventiService.addEvento(this.evento).subscribe(
+          () => this.submitted = true
+        )
+      }
     )
   }
 }
