@@ -11,8 +11,8 @@ export class ProfiloComponent implements OnInit {
 
   nome: string;
   cognome: string;
-  codiceFiscale: string = "";
-  telefono: string = "";
+  codiceFiscale: string;
+  telefono: string;
   nomeComuneResidenza: string;
   provinciaComuneResidenza: string;
   latitudineResidenza: number;

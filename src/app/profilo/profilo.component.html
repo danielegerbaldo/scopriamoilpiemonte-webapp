@@ -1,52 +1,52 @@
 <div class="d-flex flex-column mt-3 p-3 parent">
   <div>
     <h2> Dati personali </h2>
-    <div *ngIf="nome !== null && nome !== ''">
+    <div *ngIf="nome">
       <p> <b>Nome: </b> {{nome}} </p>
     </div>
-    <div *ngIf="cognome !== null && cognome !== ''">
+    <div *ngIf="cognome">
       <p> <b>Cognome: </b> {{cognome}} </p>
     </div>
-    <div *ngIf="codiceFiscale !== null && codiceFiscale !== ''">
+    <div *ngIf="codiceFiscale">
       <p> <b>Codice Fiscale: </b> {{codiceFiscale}} </p>
     </div>
-    <div *ngIf="telefono !== null && telefono !== ''">
+    <div *ngIf="telefono">
       <p> <b>Numero di telefono: </b> {{telefono}} </p>
     </div>
-    <div *ngIf="email !== null && email !== ''">
+    <div *ngIf="email">
       <p> <b>Email: </b> {{email}} </p>
     </div>
-    <div *ngIf="ruolo !== null">
+    <div *ngIf="ruolo">
       <p> <b>Ruolo: </b> {{ruolo}} </p>
     </div>
   </div>
   <div>
     <h2> Comune di Residenza </h2>
-    <div *ngIf="nomeComuneResidenza !== null && nomeComuneResidenza !== ''">
+    <div *ngIf="nomeComuneResidenza">
       <p> <b>Nome: </b> {{nomeComuneResidenza}} </p>
     </div>
-    <div *ngIf="provinciaComuneResidenza !== null && provinciaComuneResidenza !== ''">
+    <div *ngIf="provinciaComuneResidenza">
       <p> <b>Provincia: </b> {{provinciaComuneResidenza}} </p>
     </div>
-    <div *ngIf="latitudineResidenza !== null">
+    <div *ngIf="latitudineResidenza">
       <p> <b>Latitudine: </b> {{latitudineResidenza}} </p>
     </div>
-    <div *ngIf="longitudineResidenza !== null">
+    <div *ngIf="longitudineResidenza">
       <p> <b>Longitudine: </b> {{longitudineResidenza}} </p>
     </div>
   </div>
   <div>
     <h2> Comune di lavoro </h2>
-    <div *ngIf="nomeComuneDipendente !== null && nomeComuneDipendente !== ''">
+    <div *ngIf="nomeComuneDipendente">
       <p> <b>Nome: </b> {{nomeComuneDipendente}} </p>
     </div>
-    <div *ngIf="provinciaComuneDipendente !== null && provinciaComuneDipendente !== ''">
+    <div *ngIf="provinciaComuneDipendente">
       <p> <b>Provincia: </b> {{provinciaComuneDipendente}} </p>
     </div>
-    <div *ngIf="latitudineDipendente !== null">
+    <div *ngIf="latitudineDipendente">
       <p> <b>Latitudine: </b> {{latitudineDipendente}} </p>
     </div>
-    <div *ngIf="longitudineDipendente !== null">
+    <div *ngIf="longitudineDipendente">
       <p> <b>Longitudine: </b> {{longitudineDipendente}} </p>
     </div>
   </div>
