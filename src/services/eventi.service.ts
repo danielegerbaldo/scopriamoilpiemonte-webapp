@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Evento } from "../models/data.model"
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class EventiService {
   constructor(private http: HttpClient) { }
 
   getEventi(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.baseUrl)
+    return this.http.get<Evento[]>("http://localhost/api/v1/public/evento-composed/getAllEvent")
       .pipe(
         catchError(this.handleError<Evento[]>('getEventi', []))
       );
@@ -34,7 +34,7 @@ export class EventiService {
   addEvento(evento: Evento): Observable<Evento> {
     return this.http.post<Evento>(this.baseUrl, evento, this.httpOptions).pipe(
       tap((newEvento: Evento) => console.log(`added event w/ id=${newEvento.id}`)),
-      catchError(this.handleError<Evento>('addHero'))
+      catchError(this.handleError<Evento>('add event'))
     );
   }
 

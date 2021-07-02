@@ -39,7 +39,7 @@ export class GeneraEventoComponent implements OnInit {
     "indirizzo": "",
     "latitudine": 0,
     "longitudine": 0,
-    "proprietario": 1,
+    "proprietario": -1,
     "comune": 1001,
     "iscritti": []
   };
@@ -49,10 +49,13 @@ export class GeneraEventoComponent implements OnInit {
   constructor(
     private eventiService : EventiService,
     private userService : UserService,
-    private http: HttpClient,
     private municipalityService : MunicipalityService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.getUtente().subscribe(
+      utente => this.evento.proprietario = utente.userID
+    );
+  }
 
   ngAfterViewInit(){
     if (typeof Microsoft !== 'undefined') {

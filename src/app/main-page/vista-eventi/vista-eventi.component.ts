@@ -36,7 +36,7 @@ export class VistaEventiComponent implements OnInit {
   }
 
   getEventi(){
-    this.listaEventi$ = this.eventiService.getEventi()
+    this.listaEventi$ = this.eventiService.getEventi();
   }
 
   getFiltri(){
