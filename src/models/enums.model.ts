@@ -17,5 +17,6 @@ export enum Pagina{
   mappa,
   creaevento,
   creasondaggio,
-  profilo
+  profilo,
+  dipendenticomunali
 }

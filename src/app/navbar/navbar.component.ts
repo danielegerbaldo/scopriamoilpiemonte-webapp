@@ -13,8 +13,8 @@ export class NavbarComponent implements OnInit, OnChanges {
   elementi: String[];
   elementi_ospite = ["eventi", "mappa"];
   elementi_base = ["profilo"]
-  elementi_sindaco = ["crea evento", "crea sondaggio", "da confermare", "profilo"];
-  elementi_collaboratore = ["crea evento", "crea sondaggio", "profilo"];
+  elementi_sindaco = ["crea evento", "dipendenti comunali", "profilo"];
+  elementi_collaboratore = ["crea evento", "profilo"];
   @Output() pageEmitter = new EventEmitter<Pagina>();
 
   constructor() {}

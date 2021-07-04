@@ -1,0 +1,8 @@
+.utente{
+  background-color: dodgerblue;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 6px;
+  max-width: 500px;
+}

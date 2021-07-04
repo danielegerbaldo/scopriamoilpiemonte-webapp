@@ -19,7 +19,7 @@ export class RegistratiComponent implements OnInit {
   telefono: string = "";
   comuneResidenza: number;
   comuneDipendente: number;
-  ruolo: Ruolo;
+  ruolo: Ruolo = Ruolo.base;
   email: string;
   pw1: string;
   pw2: string;

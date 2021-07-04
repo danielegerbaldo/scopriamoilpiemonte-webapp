@@ -25,6 +25,7 @@
     "async": "^2.5.0",
     "bingmaps": "^2.0.3",
     "bootstrap": "^4.5.3",
+    "ngx-cookie-service": "^12.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

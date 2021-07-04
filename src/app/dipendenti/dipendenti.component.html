@@ -1,0 +1,15 @@
+<div class="d-flex flex-row flex-wrap justify-content-center">
+  <ng-container *ngFor="let dip of dipendenti$ | async">
+    <div *ngIf="!itsMe(dip)" class="m-2 p-2 utente">
+      <p><b>Nome: </b> {{dip.nome}} </p>
+      <p><b>Cognome: </b> {{dip.cognome}} </p>
+      <p><b>Ruolo: </b> {{printRuolo(dip)}} </p>
+      <div *ngIf="isCollaboratore(dip)">
+        <button type="button" class="btn btn-primary" (click)="changeRole(dip, Ruolo.base, $event)"> Degrada </button>
+      </div>
+      <div *ngIf="isClient(dip)">
+        <button type="button" class="btn btn-primary" (click)="changeRole(dip, Ruolo.collaboratore, $event)"> Promuovi </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -77,6 +77,26 @@ export class UserService {
     );
   }
 
+  getDipendentiComune(comune : number){
+    var url = this.baseUrl + "utente/getDipendentiDiComune";
+    url = `${url}/${comune}`;
+    return this.http.get(url, this.httpOptions).pipe(
+      catchError(this.handleError<any>('dipendenti comune'))
+    );
+  }
+
+  changeRole(userID : number, ruolo : Ruolo){
+    const ruoli = this.ruoloConverter(ruolo);
+    return this.http.post(this.baseUrl + "utente/changeRole",
+    {
+      "id": userID,
+      "ruoli": ruoli
+    },
+    this.httpOptions).pipe(
+      catchError(this.handleError<any>('login'))
+    );
+  }
+
   ruoloConverter(ruolo : Ruolo) : String[]{
     var ret = [];
     switch(ruolo){

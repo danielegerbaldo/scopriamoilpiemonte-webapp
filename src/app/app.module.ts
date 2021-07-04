@@ -19,6 +19,8 @@ import { GeneraEventoComponent } from './genera-evento/genera-evento.component';
 import { EventiService } from 'src/services/eventi.service';
 import { AuthInterceptor } from 'src/services/interceptor';
 import { ProfiloComponent } from './profilo/profilo.component';
+import { CookieService } from 'ngx-cookie-service';
+import { DipendentiComponent } from './dipendenti/dipendenti.component';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { ProfiloComponent } from './profilo/profilo.component';
     VistaEventiComponent,
     MappaComponent,
     GeneraEventoComponent,
-    ProfiloComponent
+    ProfiloComponent,
+    DipendentiComponent
   ],
     imports: [
         BrowserModule,
@@ -45,6 +48,7 @@ import { ProfiloComponent } from './profilo/profilo.component';
     FilterService,
     UserService,
     EventiService,
+    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

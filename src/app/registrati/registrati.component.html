@@ -21,14 +21,6 @@
     <input class="form-control" type="text" id="telefono" 
       [(ngModel)]="telefono" name="telefono" placeholder="Numero di telefono">
   </div>
-  <div class="form-group">
-    <label class="control-label" for="ruolo">Scegli il tuo ruolo: </label>
-    <select name="ruolo" [(ngModel)]="ruolo" id="ruolo" required>
-      <option [value]="ruoloEnum.base"> base </option>
-      <option [value]="ruoloEnum.collaboratore"> collaboratore </option>
-      <option [value]="ruoloEnum.sindaco"> sindaco </option>
-    </select>
-  </div>
   <div *ngIf="comuni$ !== null">
     <div class="form-group">
       <label class="control-label" for="residenza">Scegli il tuo comune di residenza: </label>
