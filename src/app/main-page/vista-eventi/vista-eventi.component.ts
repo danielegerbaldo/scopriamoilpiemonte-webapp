@@ -66,7 +66,7 @@ export class VistaEventiComponent implements OnInit {
   }
 
   isMine(evento : Evento){
-    return evento.proprietario === this.userID;
+    return evento.proprietario.id === this.userID;
   }
 
   delete(evento : Evento, $event : MouseEvent){
@@ -97,7 +97,7 @@ export class VistaEventiComponent implements OnInit {
 
   subscribed(evento : Evento) : boolean{
     var ret = false;
-    if(evento.iscritti.includes(this.userID)){
+    if(evento.iscritti !== null && evento.iscritti.includes(this.userID)){
       ret = true;
     }
     return ret;
