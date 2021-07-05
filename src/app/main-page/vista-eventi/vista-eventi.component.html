@@ -14,7 +14,9 @@
             <button type="button" class="btn btn-primary" (click)="unsubscribe(ev, $event)"> Annulla iscrizione </button>
           </div>
           <ng-template #subscribedBlock>
-            <button type="button" class="btn btn-primary" (click)="subscribe(ev, $event)"> Iscriviti </button>
+            <div *ngIf="postiRimanenti(ev) > 0">
+              <button type="button" class="btn btn-primary" (click)="subscribe(ev, $event)"> Iscriviti </button>
+            </div>
           </ng-template>
           <div *ngIf="isMine(ev)" class="mt-1">
             <button type="button" class="btn btn-danger" (click)="delete(ev, $event)"> Elimina </button>
