@@ -20,6 +20,7 @@ export class VistaEventiComponent implements OnInit {
   userID : number;
   userRole : Ruolo;
   Ruolo = Ruolo;
+  iscrizioni : number[] = [];
 
   constructor(private eventiService : EventiService, private filterService : FilterService, private userService : UserService) {
   }
@@ -36,7 +37,20 @@ export class VistaEventiComponent implements OnInit {
   }
 
   getEventi(){
-    this.listaEventi$ = this.eventiService.getEventi();
+    if(this.userID > 0){
+      this.eventiService.getSubscribed(this.userID).subscribe(
+        events => {
+          this.iscrizioni = [];
+          for(var i = 0; i < events.length; i++){
+            this.iscrizioni.push(events[i].id);
+          }
+          this.listaEventi$ = this.eventiService.getEventi();
+        }
+      )
+    }
+    else{
+      this.listaEventi$ = this.eventiService.getEventi();
+    }
   }
 
   getFiltri(){
@@ -97,7 +111,7 @@ export class VistaEventiComponent implements OnInit {
 
   subscribed(evento : Evento) : boolean{
     var ret = false;
-    if(evento.iscritti !== null && evento.iscritti.includes(this.userID)){
+    if(this.iscrizioni.includes(evento.id)){
       ret = true;
     }
     return ret;

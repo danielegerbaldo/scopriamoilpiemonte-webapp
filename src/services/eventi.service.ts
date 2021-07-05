@@ -23,9 +23,18 @@ export class EventiService {
       );
   }
 
+  getSubscribed(userID : number) : Observable<Evento[]>{
+    var url = this.baseUrl + "/iscrizione-utente";
+    url = `${url}/${userID}`;
+    return this.http.get<Evento[]>(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Evento[]>('getEventi', []))
+      );
+  }
+
   getEvento(id: number): Observable<Evento> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Evento>(url).pipe(
+    return this.http.get<Evento>(url, this.httpOptions).pipe(
       catchError(this.handleError<Evento>(`getEvento id=${id}`))
     );
   }
