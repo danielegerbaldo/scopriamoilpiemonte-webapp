@@ -117,6 +117,13 @@ export class UserService {
     return ret;
   }
 
+  validateToken(token : string){
+    const url = this.baseUrl + "validateToken?token=" + token;
+    return this.http.get(url, this.httpOptions).pipe(
+      catchError(this.handleError<any>('validate token'))
+    );
+  }
+
   assignRuolo(ruoliArr){
     var ruolo = Ruolo.base;
     if(ruoliArr.includes("ROLE_ADMIN") || ruoliArr.includes("ROLE_MAYOR")){
