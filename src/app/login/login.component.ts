@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
           this.utenteSconosciuto = false;
           this.tokenService.setToken(data.accessToken);
           this.updateUtente(data.id);
-          console.log("accedi ok");
         },
         error => {  // gets ignored for some reason
           this.utenteSconosciuto = true;
@@ -55,7 +54,6 @@ export class LoginComponent implements OnInit {
   updateUtente = (id : number) => {
     this.userService.downloadInfoUtente(id).subscribe(
       utente => {
-        console.log(utente);
         var ruolo = this.userService.assignRuolo(utente.ruoli);
         var u: Utente = {
           "nome": utente.nome,

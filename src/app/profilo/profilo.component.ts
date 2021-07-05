@@ -45,14 +45,14 @@ export class ProfiloComponent implements OnInit {
         this.cognome = info.cognome;
         this.codiceFiscale = info.cf;
         this.telefono = info.telefono;
-        this.nomeComuneResidenza = info.comuneResidenza.nome;
-        this.provinciaComuneResidenza = info.comuneResidenza.provincia;
-        this.latitudineResidenza = info.comuneResidenza.lat;
-        this.longitudineResidenza = info.comuneResidenza.lng;
-        this.nomeComuneDipendente = info.dipendenteDiComune.nome;
-        this.provinciaComuneDipendente = info.dipendenteDiComune.provincia;
-        this.latitudineDipendente = info.dipendenteDiComune.lat;
-        this.longitudineDipendente = info.dipendenteDiComune.lng;
+        this.nomeComuneResidenza = info.comuneResidenza?.nome;
+        this.provinciaComuneResidenza = info.comuneResidenza?.provincia;
+        this.latitudineResidenza = info.comuneResidenza?.lat;
+        this.longitudineResidenza = info.comuneResidenza?.lng;
+        this.nomeComuneDipendente = info.dipendenteDiComune?.nome;
+        this.provinciaComuneDipendente = info.dipendenteDiComune?.provincia;
+        this.latitudineDipendente = info.dipendenteDiComune?.lat;
+        this.longitudineDipendente = info.dipendenteDiComune?.lng;
         this.ruolo = this.userService.assignRuolo(info.ruoli);
         this.email = info.email;
       }
