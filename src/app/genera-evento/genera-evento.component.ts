@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Evento } from "../../models/data.model";
 import { EventiService } from "../../services/eventi.service";
 import { UserService } from "../../services/user.service";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { MunicipalityService } from 'src/services/municipality.service';
 
 @Component({
