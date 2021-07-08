@@ -97,6 +97,40 @@ export class UserService {
     );
   }
 
+  validateToken(token : string){
+    const url = this.baseUrl + "validateToken?token=" + token;
+    return this.http.get(url, this.httpOptions).pipe(
+      catchError(this.handleError<any>('validate token'))
+    );
+  }
+
+  modificaUtente(
+    id : number,
+    email: string,
+    nome : string,
+    cognome : string,
+    cf : string,
+    telefono : string,
+    comuneResidenza : number,
+    dipendenteDiComune : number
+  ){
+    var url = this.baseUrl + "utente/updateUser";
+    url = `${url}/${id}`;
+    return this.http.put(url,
+      {
+        "email": email,
+        "nome": nome,
+        "cognome": cognome,
+        "cf": cf,
+        "telefono": telefono,
+        "comuneResidenza": comuneResidenza,
+        "dipendenteDiComune": dipendenteDiComune
+      },
+      this.httpOptions).pipe(
+      catchError(this.handleError<any>('put utente'))
+    );
+  }
+
   ruoloConverter(ruolo : Ruolo) : String[]{
     var ret = [];
     switch(ruolo){
@@ -115,13 +149,6 @@ export class UserService {
         break;
     }
     return ret;
-  }
-
-  validateToken(token : string){
-    const url = this.baseUrl + "validateToken?token=" + token;
-    return this.http.get(url, this.httpOptions).pipe(
-      catchError(this.handleError<any>('validate token'))
-    );
   }
 
   assignRuolo(ruoliArr){

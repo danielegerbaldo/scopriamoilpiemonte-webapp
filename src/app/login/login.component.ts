@@ -4,6 +4,8 @@ import { Utente } from "../../models/data.model";
 import { UserService } from "../../services/user.service";
 import { TokenStorageService } from "../../services/token-storage.service";
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { MunicipalityService } from 'src/services/municipality.service';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +20,22 @@ export class LoginComponent implements OnInit {
   @Output() pageEmitter = new EventEmitter<Pagina>();
   error_message = "";
   sending = false;
+  sendingGoogle = false;
+  newGoogleLogin = false;
+  comuni$ : Observable<any>;
+  utente : Utente;
+  cf : string;
+  telefono : string;
 
   constructor(
     private userService: UserService,
     private tokenService : TokenStorageService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private municipalityService : MunicipalityService
     ) { }
 
   ngOnInit(): void {
+    this.comuni$ = this.municipalityService.getComuni();
   }
 
   registrati(){
@@ -55,7 +65,7 @@ export class LoginComponent implements OnInit {
     this.userService.downloadInfoUtente(id).subscribe(
       utente => {
         var ruolo = this.userService.assignRuolo(utente.ruoli);
-        var u: Utente = {
+        this.utente = {
           "nome": utente.nome,
           "cognome": utente.cognome,
           "ruolo": ruolo,
@@ -63,12 +73,15 @@ export class LoginComponent implements OnInit {
           "comuneDipendenteID": utente.dipendenteDiComune?.istat,
           "userID": id
         }
-        this.userService.setUtente(u);
-        this.userService.setStatoLogin(StatoLogin.effettuato);
-        console.log("login OK");
-        sessionStorage.setItem('token', this.tokenService.getToken());
-        sessionStorage.setItem('user', JSON.stringify(u));
-        this.pageEmitter.emit(Pagina.eventi);
+        if(this.utente.comuneResidenzaID && this.utente.comuneDipendenteID){
+          this.finalizeLogin();
+        }
+        else{
+          this.email = utente.email;
+          this.cf = utente.cf;
+          this.telefono = utente.telefono;
+          this.newGoogleLogin = true;
+        }
       },
       error => this.sending = false
     );
@@ -88,7 +101,6 @@ export class LoginComponent implements OnInit {
         var cookieName = 'GoogleLogin';
         if(this.cookieService.check(cookieName)){
           var cookie = this.cookieService.get(cookieName);
-          console.log("Cookie found");
           this.cookieService.delete(cookieName);
           this.utenteSconosciuto = false;
           clearInterval(intervalId);
@@ -104,6 +116,30 @@ export class LoginComponent implements OnInit {
       },
       intervalLength
     );
+  }
+
+  finalizeFirstGoogleLogin(){
+    this.userService.modificaUtente(
+      this.utente.userID,
+      this.email,
+      this.utente.nome,
+      this.utente.cognome,
+      this.cf,
+      this.telefono,
+      this.utente.comuneResidenzaID,
+      this.utente.comuneDipendenteID
+    ).subscribe(
+      () => this.finalizeLogin()
+    );
+  }
+
+  finalizeLogin(){    
+    this.userService.setUtente(this.utente);
+    this.userService.setStatoLogin(StatoLogin.effettuato);
+    console.log("login OK");
+    sessionStorage.setItem('token', this.tokenService.getToken());
+    sessionStorage.setItem('user', JSON.stringify(this.utente));
+    this.pageEmitter.emit(Pagina.eventi);
   }
 
   createWindow(url: string, name: string = 'Window', width: number = 500, height: number = 600, left: number = 0, top: number = 0) {
