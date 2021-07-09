@@ -21,6 +21,7 @@ import { AuthInterceptor } from 'src/services/interceptor';
 import { ProfiloComponent } from './profilo/profilo.component';
 import { CookieService } from 'ngx-cookie-service';
 import { DipendentiComponent } from './dipendenti/dipendenti.component';
+import { ModificaProfiloComponent } from './profilo/modifica-profilo/modifica-profilo.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DipendentiComponent } from './dipendenti/dipendenti.component';
     MappaComponent,
     GeneraEventoComponent,
     ProfiloComponent,
-    DipendentiComponent
+    DipendentiComponent,
+    ModificaProfiloComponent
   ],
     imports: [
         BrowserModule,

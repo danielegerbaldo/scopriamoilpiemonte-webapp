@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Ruolo } from 'src/models/enums.model';
 import { UserService } from 'src/services/user.service';
 
@@ -26,16 +26,22 @@ export class ProfiloComponent implements OnInit {
   pw1: string;
   pw2: string;
 
-  constructor(private userService : UserService) { }
+  modifyPage = false;
+
+  constructor(private userService : UserService, private changeDetector : ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.load();
+  }
+
+  load(){
     var id : number;
     this.userService.getUtente().subscribe(
       u => {
         id = u.userID;
         this.getInfoUtente(id);
       }
-    )
+    );
   }
 
   getInfoUtente(id : number){
@@ -57,6 +63,10 @@ export class ProfiloComponent implements OnInit {
         this.email = info.email;
       }
     )
+  }
+
+  changePage(modify : boolean){
+    this.modifyPage = modify;
   }
 
 }

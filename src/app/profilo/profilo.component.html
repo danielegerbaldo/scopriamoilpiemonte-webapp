@@ -1,53 +1,66 @@
-<div class="d-flex flex-column mt-3 p-3 parent">
-  <div>
-    <h2> Dati personali </h2>
-    <div *ngIf="nome">
-      <p> <b>Nome: </b> {{nome}} </p>
+<div *ngIf="!modifyPage; else modify">
+  <div class="d-flex flex-column mt-3 p-3 parent">
+    <div>
+      <h2> Dati personali </h2>
+      <div *ngIf="nome">
+        <p> <b>Nome: </b> {{nome}} </p>
+      </div>
+      <div *ngIf="cognome">
+        <p> <b>Cognome: </b> {{cognome}} </p>
+      </div>
+      <div *ngIf="codiceFiscale">
+        <p> <b>Codice Fiscale: </b> {{codiceFiscale}} </p>
+      </div>
+      <div *ngIf="telefono">
+        <p> <b>Numero di telefono: </b> {{telefono}} </p>
+      </div>
+      <div *ngIf="email">
+        <p> <b>Email: </b> {{email}} </p>
+      </div>
+      <div *ngIf="ruolo">
+        <p> <b>Ruolo: </b> {{ruolo}} </p>
+      </div>
     </div>
-    <div *ngIf="cognome">
-      <p> <b>Cognome: </b> {{cognome}} </p>
+    <div>
+      <h2> Comune di Residenza </h2>
+      <div *ngIf="nomeComuneResidenza">
+        <p> <b>Nome: </b> {{nomeComuneResidenza}} </p>
+      </div>
+      <div *ngIf="provinciaComuneResidenza">
+        <p> <b>Provincia: </b> {{provinciaComuneResidenza}} </p>
+      </div>
+      <div *ngIf="latitudineResidenza">
+        <p> <b>Latitudine: </b> {{latitudineResidenza}} </p>
+      </div>
+      <div *ngIf="longitudineResidenza">
+        <p> <b>Longitudine: </b> {{longitudineResidenza}} </p>
+      </div>
     </div>
-    <div *ngIf="codiceFiscale">
-      <p> <b>Codice Fiscale: </b> {{codiceFiscale}} </p>
+    <div>
+      <h2> Comune di lavoro </h2>
+      <div *ngIf="nomeComuneDipendente">
+        <p> <b>Nome: </b> {{nomeComuneDipendente}} </p>
+      </div>
+      <div *ngIf="provinciaComuneDipendente">
+        <p> <b>Provincia: </b> {{provinciaComuneDipendente}} </p>
+      </div>
+      <div *ngIf="latitudineDipendente">
+        <p> <b>Latitudine: </b> {{latitudineDipendente}} </p>
+      </div>
+      <div *ngIf="longitudineDipendente">
+        <p> <b>Longitudine: </b> {{longitudineDipendente}} </p>
+      </div>
     </div>
-    <div *ngIf="telefono">
-      <p> <b>Numero di telefono: </b> {{telefono}} </p>
-    </div>
-    <div *ngIf="email">
-      <p> <b>Email: </b> {{email}} </p>
-    </div>
-    <div *ngIf="ruolo">
-      <p> <b>Ruolo: </b> {{ruolo}} </p>
-    </div>
-  </div>
-  <div>
-    <h2> Comune di Residenza </h2>
-    <div *ngIf="nomeComuneResidenza">
-      <p> <b>Nome: </b> {{nomeComuneResidenza}} </p>
-    </div>
-    <div *ngIf="provinciaComuneResidenza">
-      <p> <b>Provincia: </b> {{provinciaComuneResidenza}} </p>
-    </div>
-    <div *ngIf="latitudineResidenza">
-      <p> <b>Latitudine: </b> {{latitudineResidenza}} </p>
-    </div>
-    <div *ngIf="longitudineResidenza">
-      <p> <b>Longitudine: </b> {{longitudineResidenza}} </p>
-    </div>
-  </div>
-  <div>
-    <h2> Comune di lavoro </h2>
-    <div *ngIf="nomeComuneDipendente">
-      <p> <b>Nome: </b> {{nomeComuneDipendente}} </p>
-    </div>
-    <div *ngIf="provinciaComuneDipendente">
-      <p> <b>Provincia: </b> {{provinciaComuneDipendente}} </p>
-    </div>
-    <div *ngIf="latitudineDipendente">
-      <p> <b>Latitudine: </b> {{latitudineDipendente}} </p>
-    </div>
-    <div *ngIf="longitudineDipendente">
-      <p> <b>Longitudine: </b> {{longitudineDipendente}} </p>
+    <div class="mx-auto">
+      <button class="btn btn-primary" type="button" (click)="changePage(true)">modifica</button>
     </div>
   </div>
 </div>
+<ng-template #modify>
+  <app-modifica-profilo
+  [email]="email"
+  [cf]="codiceFiscale"
+  [telefono]="telefono"
+  (backEvent)="changePage($event); load()">
+  </app-modifica-profilo>
+</ng-template>
