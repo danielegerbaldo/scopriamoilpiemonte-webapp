@@ -47,9 +47,17 @@ export class LoginComponent implements OnInit {
       this.sending = true;
       this.userService.login(this.email, this.password).subscribe(
         data => {
-          this.utenteSconosciuto = false;
-          this.tokenService.setToken(data.accessToken);
-          this.updateUtente(data.id);
+          try{
+            this.utenteSconosciuto = false;
+            this.tokenService.setToken(data.accessToken);
+            this.updateUtente(data.id);
+          }
+          catch(e){
+            this.utenteSconosciuto = true;
+            this.sending = false;
+            this.error_message = "email o password errati"
+            console.log("accedi ko");
+          }
         },
         error => {  // gets ignored for some reason
           this.utenteSconosciuto = true;
