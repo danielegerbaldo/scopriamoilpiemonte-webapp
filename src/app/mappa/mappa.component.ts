@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventiService } from "../../services/eventi.service";
 import { Evento } from "../../models/data.model"
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-mappa',
@@ -10,11 +11,10 @@ import { Evento } from "../../models/data.model"
 export class MappaComponent implements OnInit {
 
   @ViewChild('myMap') myMap; // using ViewChild to reference the div instead of setting an id
-  //listaEventi : Evento[] = [];
   colors = ["red", "blue", "green", "yellow", "pink", "orange", "violet"];
   map;
 
-  constructor(private eventiService : EventiService) { }
+  constructor(private eventiService : EventiService, private userService : UserService) { }
 
   ngOnInit(): void {
     this.getEventi();
@@ -22,11 +22,6 @@ export class MappaComponent implements OnInit {
       console.log('BingMapComponent.ngOnInit');
       this.loadMap();
     }
-  }
-
-  ngOnChanges(changes : SimpleChanges){
-    console.log("changes");
-    
   }
 
   getEventi(){
@@ -49,6 +44,27 @@ export class MappaComponent implements OnInit {
         )
       );
     }
+    var id : number;
+    this.userService.getUtente().subscribe(
+      u => {
+        id = u.userID;
+        this.userService.downloadInfoUtente(id).subscribe(
+          userInfo => {
+            this.map.entities.push(
+              new Microsoft.Maps.Pushpin(
+                new Microsoft.Maps.Location(
+                  userInfo.comuneResidenza.lat, userInfo.comuneResidenza.lng
+                ),
+                {
+                  title: "Il mio comune",
+                  color: "red"
+                }
+              )
+            );
+          }
+        );
+      }
+    );
   }
 
   loadMap() {
