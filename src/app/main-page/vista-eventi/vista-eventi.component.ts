@@ -21,6 +21,8 @@ export class VistaEventiComponent implements OnInit {
   userRole : Ruolo;
   Ruolo = Ruolo;
   iscrizioni : number[] = [];
+  userLat : number = null;
+  userLng : number = null;
 
   constructor(private eventiService : EventiService, private filterService : FilterService, private userService : UserService) {
   }
@@ -31,7 +33,19 @@ export class VistaEventiComponent implements OnInit {
       utente => {
         this.userID = utente.userID;
         this.userRole = utente.ruolo;
+        if(this.userID > -1){
+          this.getCoordinates(this.userID);
+        }
         this.getEventi();
+      }
+    );
+  }
+
+  getCoordinates(id : number){
+    this.userService.downloadInfoUtente(id).subscribe(
+      info => {
+        this.userLat = info.comuneResidenza.lat;
+        this.userLng = info.comuneResidenza.lng;
       }
     );
   }
@@ -102,7 +116,8 @@ export class VistaEventiComponent implements OnInit {
         this.applyMaxDateFilter(evento) ||
         this.applyPricefilter(evento) ||
         this.applySubscribeFilter(evento) ||
-        this.applyUnsubscribedFilter(evento)){
+        this.applyUnsubscribedFilter(evento) ||
+        this.applyDistanceFilter(evento)){
         ret = true;
       }
     }
@@ -123,6 +138,18 @@ export class VistaEventiComponent implements OnInit {
 
   applyUnsubscribedFilter(evento : Evento){
     return this.filtri.noIscrizioni && this.subscribed(evento);
+  }
+
+  applyDistanceFilter(evento : Evento) : boolean{
+    var ret = false;
+    if(this.userLat && this.userLng){
+      var maxDistance = this.filtri.distanza;
+      var distance = this.filterService.distanceInKmBetweenEarthCoordinates(this.userLat, this.userLng, evento.latitudine, evento.longitudine);
+      if(distance > maxDistance){
+        ret = true;
+      }
+    }
+    return ret;
   }
 
   applyAvailabilityFilter(evento : Evento) : boolean{
