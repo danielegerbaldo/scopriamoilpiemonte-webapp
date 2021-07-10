@@ -1,4 +1,4 @@
-<div class="d-flex flex-column mt-3 p-3 parent">
+<div class="d-flex flex-column mt-3 p-3 big_card">
   <div *ngIf="newGoogleLogin; else normalForm">
     <form class="form-horizontal" (ngSubmit)="finalizeFirstGoogleLogin()" #googleMunicipalityForm="ngForm">
       <h1>Benvenuto!</h1>
@@ -25,7 +25,7 @@
         <input class="form-control" type="text" id="telefono" 
           [(ngModel)]="telefono" name="telefono" placeholder="Numero di telefono">
       </div>
-      <div class="form-group">
+      <div class="form-group row justify-content-center">
         <div class="submit">
           <button type="submit" class="btn btn-success" [disabled]="!googleMunicipalityForm.form.valid || sendingGoogle">Conferma</button>
         </div>
@@ -49,7 +49,7 @@
         <input class="form-control" type="password" id="password" required 
           [(ngModel)]="password" name="password" placeholder="password">
       </div>
-      <div class="form-group">
+      <div class="form-group row justify-content-center">
         <div class="submit">
           <button type="submit" class="btn btn-success" [disabled]="!login.form.valid || sending">Conferma</button>
         </div>

@@ -1,6 +1,6 @@
 <div class="d-flex flex-row flex-wrap justify-content-center">
   <ng-container *ngFor="let dip of dipendenti$ | async">
-    <div *ngIf="!itsMe(dip)" class="m-2 p-2 utente">
+    <div *ngIf="!itsMe(dip)" class="m-2 p-2 small_card">
       <p><b>Nome: </b> {{dip.nome}} </p>
       <p><b>Cognome: </b> {{dip.cognome}} </p>
       <p><b>Ruolo: </b> {{printRuolo(dip)}} </p>

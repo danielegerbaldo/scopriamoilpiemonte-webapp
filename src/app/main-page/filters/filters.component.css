@@ -1,12 +1,3 @@
-.filterBox{
-  background-color: #DCDCDC;
-  color: black;
-  border-width: 2px;
-  border-style: solid;
-  border-color: black;
-  padding: 5px;
-}
-
 div{
   overflow: auto;
 }

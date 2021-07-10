@@ -1,5 +1,5 @@
 <div [hidden]="submitted">
-  <form class="form-horizontal mt-3 p-3" (ngSubmit)="onSubmit()" #creaEvento="ngForm">
+  <form class="form-horizontal mt-3 p-3 big_card" (ngSubmit)="onSubmit()" #creaEvento="ngForm">
     <h2 class="text-center">Crea evento</h2>
     <div class="form-group">
       <label class="control-label" for="nome">nome: </label>
@@ -44,7 +44,7 @@
       <label class="control-label" for="coordinate">seleziona dove si terrà l'evento: </label>
       <div id='myMap' #myMap style='width: 65vw; height: 65vh; margin-left: auto; margin-right: auto;'></div>
     </div>
-    <div class="form-group">
+    <div class="form-group row justify-content-center">
       <button type="submit" class="btn btn-success" [disabled]="!creaEvento.form.valid || evento.latitudine == 0 || evento.longitudine == 0 || posting">Conferma</button>
     </div>
   </form>
