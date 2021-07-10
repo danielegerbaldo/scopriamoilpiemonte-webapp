@@ -55,8 +55,8 @@ export class EventiService {
   }
 
   unsubscribe(eventoID : number, utenteID : number){
-    const url = this.baseUrl + "/disiscrivi";
-    return this.http.post(url, {"evento_id" : eventoID, "utente_id": utenteID}, this.httpOptions).pipe(
+    const url = this.baseUrl + "/disiscrivi?idUtente=" + utenteID + "&idEvento=" + eventoID;
+    return this.http.post(url, this.httpOptions).pipe(
       catchError(this.handleError<any>('unsubscribe'))
     );
   }
