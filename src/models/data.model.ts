@@ -29,6 +29,7 @@ export class Evento{
   partecipantiMin: number;
   partecipanti: number;
   tipoEvento: {
+    id: number,
     nome: String,
     descrizione: String
   }

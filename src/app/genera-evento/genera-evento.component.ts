@@ -33,8 +33,9 @@ export class GeneraEventoComponent implements OnInit {
     "data": null,
     "streaming": false,
     "tipoEvento": {
-      "nome": "bo",
-      "descrizione": "bo"
+      "id": 1,
+      "nome": "esempio",
+      "descrizione": "esempio creazione tipo evento"
     },
     "indirizzo": "",
     "latitudine": 0,
