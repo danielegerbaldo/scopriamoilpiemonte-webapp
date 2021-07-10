@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import {Ruolo, StatoLogin} from "../../models/enums.model"
+import {Pagina, Ruolo, StatoLogin} from "../../models/enums.model"
 import { Utente } from "../../models/data.model";
 import { UserService } from "../../services/user.service"
 import { TokenStorageService } from "../../services/token-storage.service"
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   StatoLogin = StatoLogin;
   statoLogin: StatoLogin;
   utente: Utente;
+  @Output() pageEmitter = new EventEmitter<Pagina>();
 
   constructor(private userService: UserService, private tokenService : TokenStorageService) { 
     this.userService.utenteChange.subscribe(utente => this.utente = utente);
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit {
       "userID": -1
     }
     this.userService.setUtente(u);
+    this.pageEmitter.emit(Pagina.eventi);
     this.changeLoginStatus(StatoLogin.accesso);
     this.tokenService.clearToken();
     sessionStorage.clear();
