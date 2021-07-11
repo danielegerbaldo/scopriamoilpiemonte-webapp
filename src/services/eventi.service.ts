@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Evento } from "../models/data.model"
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,16 @@ export class EventiService {
   constructor(private http: HttpClient) { }
 
   getEventi(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.baseUrl)
+    return this.http.get<Evento[]>("http://localhost/api/v1/public/evento-composed/getAllEvent")
+      .pipe(
+        catchError(this.handleError<Evento[]>('getEventi', []))
+      );
+  }
+
+  getSubscribed(userID : number) : Observable<Evento[]>{
+    var url = this.baseUrl + "/iscrizione-utente";
+    url = `${url}/${userID}`;
+    return this.http.get<Evento[]>(url, this.httpOptions)
       .pipe(
         catchError(this.handleError<Evento[]>('getEventi', []))
       );
@@ -25,7 +34,7 @@ export class EventiService {
 
   getEvento(id: number): Observable<Evento> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Evento>(url).pipe(
+    return this.http.get<Evento>(url, this.httpOptions).pipe(
       catchError(this.handleError<Evento>(`getEvento id=${id}`))
     );
   }
@@ -34,7 +43,7 @@ export class EventiService {
   addEvento(evento: Evento): Observable<Evento> {
     return this.http.post<Evento>(this.baseUrl, evento, this.httpOptions).pipe(
       tap((newEvento: Evento) => console.log(`added event w/ id=${newEvento.id}`)),
-      catchError(this.handleError<Evento>('addHero'))
+      catchError(this.handleError<Evento>('add event'))
     );
   }
 
@@ -46,8 +55,8 @@ export class EventiService {
   }
 
   unsubscribe(eventoID : number, utenteID : number){
-    const url = this.baseUrl + "/disiscrivi";
-    return this.http.post(url, {"evento_id" : eventoID, "utente_id": utenteID}, this.httpOptions).pipe(
+    const url = this.baseUrl + "/disiscrivi?idUtente=" + utenteID + "&idEvento=" + eventoID;
+    return this.http.post(url, this.httpOptions).pipe(
       catchError(this.handleError<any>('unsubscribe'))
     );
   }

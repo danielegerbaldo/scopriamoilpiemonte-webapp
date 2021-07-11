@@ -20,6 +20,9 @@ export class VistaEventiComponent implements OnInit {
   userID : number;
   userRole : Ruolo;
   Ruolo = Ruolo;
+  iscrizioni : number[] = [];
+  userLat : number = null;
+  userLng : number = null;
 
   constructor(private eventiService : EventiService, private filterService : FilterService, private userService : UserService) {
   }
@@ -30,13 +33,38 @@ export class VistaEventiComponent implements OnInit {
       utente => {
         this.userID = utente.userID;
         this.userRole = utente.ruolo;
+        if(this.userID > -1){
+          this.getCoordinates(this.userID);
+        }
         this.getEventi();
       }
     );
   }
 
+  getCoordinates(id : number){
+    this.userService.downloadInfoUtente(id).subscribe(
+      info => {
+        this.userLat = info.comuneResidenza.lat;
+        this.userLng = info.comuneResidenza.lng;
+      }
+    );
+  }
+
   getEventi(){
-    this.listaEventi$ = this.eventiService.getEventi()
+    if(this.userID > 0){
+      this.eventiService.getSubscribed(this.userID).subscribe(
+        events => {
+          this.iscrizioni = [];
+          for(var i = 0; i < events.length; i++){
+            this.iscrizioni.push(events[i].id);
+          }
+          this.listaEventi$ = this.eventiService.getEventi();
+        }
+      )
+    }
+    else{
+      this.listaEventi$ = this.eventiService.getEventi();
+    }
   }
 
   getFiltri(){
@@ -66,7 +94,7 @@ export class VistaEventiComponent implements OnInit {
   }
 
   isMine(evento : Evento){
-    return evento.proprietario === this.userID;
+    return evento.proprietario.id === this.userID;
   }
 
   delete(evento : Evento, $event : MouseEvent){
@@ -88,7 +116,8 @@ export class VistaEventiComponent implements OnInit {
         this.applyMaxDateFilter(evento) ||
         this.applyPricefilter(evento) ||
         this.applySubscribeFilter(evento) ||
-        this.applyUnsubscribedFilter(evento)){
+        this.applyUnsubscribedFilter(evento) ||
+        this.applyDistanceFilter(evento)){
         ret = true;
       }
     }
@@ -97,7 +126,7 @@ export class VistaEventiComponent implements OnInit {
 
   subscribed(evento : Evento) : boolean{
     var ret = false;
-    if(evento.iscritti.includes(this.userID)){
+    if(this.iscrizioni.includes(evento.id)){
       ret = true;
     }
     return ret;
@@ -109,6 +138,18 @@ export class VistaEventiComponent implements OnInit {
 
   applyUnsubscribedFilter(evento : Evento){
     return this.filtri.noIscrizioni && this.subscribed(evento);
+  }
+
+  applyDistanceFilter(evento : Evento) : boolean{
+    var ret = false;
+    if(this.userLat && this.userLng){
+      var maxDistance = this.filtri.distanza;
+      var distance = this.filterService.distanceInKmBetweenEarthCoordinates(this.userLat, this.userLng, evento.latitudine, evento.longitudine);
+      if(distance > maxDistance){
+        ret = true;
+      }
+    }
+    return ret;
   }
 
   applyAvailabilityFilter(evento : Evento) : boolean{

@@ -77,6 +77,60 @@ export class UserService {
     );
   }
 
+  getDipendentiComune(comune : number){
+    var url = this.baseUrl + "utente/getDipendentiDiComune";
+    url = `${url}/${comune}`;
+    return this.http.get(url, this.httpOptions).pipe(
+      catchError(this.handleError<any>('dipendenti comune'))
+    );
+  }
+
+  changeRole(userID : number, ruolo : Ruolo){
+    const ruoli = this.ruoloConverter(ruolo);
+    return this.http.post(this.baseUrl + "utente/changeRole",
+    {
+      "id": userID,
+      "ruoli": ruoli
+    },
+    this.httpOptions).pipe(
+      catchError(this.handleError<any>('login'))
+    );
+  }
+
+  validateToken(token : string){
+    const url = this.baseUrl + "validateToken?token=" + token;
+    return this.http.get(url, this.httpOptions).pipe(
+      catchError(this.handleError<any>('validate token'))
+    );
+  }
+
+  modificaUtente(
+    id : number,
+    email: string,
+    nome : string,
+    cognome : string,
+    cf : string,
+    telefono : string,
+    comuneResidenza : number,
+    dipendenteDiComune : number
+  ){
+    var url = this.baseUrl + "utente/updateUser";
+    url = `${url}/${id}`;
+    return this.http.put(url,
+      {
+        "email": email,
+        "nome": nome,
+        "cognome": cognome,
+        "cf": cf,
+        "telefono": telefono,
+        "comuneResidenza": comuneResidenza,
+        "dipendenteDiComune": dipendenteDiComune
+      },
+      this.httpOptions).pipe(
+      catchError(this.handleError<any>('put utente'))
+    );
+  }
+
   ruoloConverter(ruolo : Ruolo) : String[]{
     var ret = [];
     switch(ruolo){

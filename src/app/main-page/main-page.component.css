@@ -5,19 +5,6 @@
   height: 100%;
 }
 
-.filters{
-  background-color: blue;
-  color: azure;
-  border-width: 2px;
-  border-style: solid;
-  border-color: black;
-  border-radius: 0px;
-}
-
 .noBottom{
   border-bottom-width: 0px;
-}
-
-.filterColumn{
-  max-width: 25%;
 }

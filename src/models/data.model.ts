@@ -1,8 +1,8 @@
 import { Ruolo } from "./enums.model";
 
 export class Utente{
-  nome: String;
-  cognome: String;
+  nome: string;
+  cognome: string;
   ruolo: Ruolo;
   comuneResidenzaID: number;
   comuneDipendenteID: number;
@@ -29,6 +29,7 @@ export class Evento{
   partecipantiMin: number;
   partecipanti: number;
   tipoEvento: {
+    id: number,
     nome: String,
     descrizione: String
   }
@@ -38,7 +39,7 @@ export class Evento{
   indirizzo: string;
   latitudine: number;
   longitudine: number;
-  proprietario: number;
+  proprietario: any;
   comune: number;
   iscritti : number[];
   //tipo: String;

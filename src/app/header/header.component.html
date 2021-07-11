@@ -4,7 +4,7 @@
   <div [ngSwitch]="statoLogin">
     <div *ngSwitchCase="StatoLogin.ospite">
       <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.accesso)">Accedi</button>
-      <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.registrazione)">Registrati</button>
+      <button class="btn btn-primary ml-1" (click)="changeLoginStatus(StatoLogin.registrazione)">Registrati</button>
     </div>
     <div *ngSwitchCase="StatoLogin.registrazione">
       <button class="btn btn-primary" (click)="changeLoginStatus(StatoLogin.ospite)">Home</button>

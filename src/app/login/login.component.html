@@ -1,36 +1,71 @@
-<div class="d-flex flex-column mt-3 p-3 parent">
-  <div *ngIf="error_message != ''">
-    <div class="alert alert-danger" role="alert"> {{error_message}} </div>
-  </div>
-  <form class="form-horizontal" (ngSubmit)="accedi()" #login="ngForm">
-    <h1>Benvenuto!</h1>
-    <h2>Accedi con le credenziali</h2>
-    <div class="form-group">
-      <label class="control-label" for="email">email: </label>
-      <input class="form-control" type="email" id="email" required 
-        [(ngModel)]="email" name="email" placeholder="Email Address">
-    </div>
-    <div class="form-group">
-      <label class="control-label" for="password">password: </label>
-      <input class="form-control" type="password" id="password" required 
-        [(ngModel)]="password" name="password" placeholder="password">
-      <div *ngIf="utenteSconosciuto" class="erroreAccesso">Utente o password errati!!</div>
-    </div>
-    <div class="form-group">
-      <div class="submit">
-        <button type="submit" class="btn btn-success" [disabled]="!login.form.valid || sending">Conferma</button>
+<div class="d-flex flex-column mt-3 p-3 big_card">
+  <div *ngIf="newGoogleLogin; else normalForm">
+    <form class="form-horizontal" (ngSubmit)="finalizeFirstGoogleLogin()" #googleMunicipalityForm="ngForm">
+      <h1>Benvenuto!</h1>
+      <h2>Inserisci le seguenti informazioni per completare l'accesso</h2>
+      <div class="form-group">
+        <label class="control-label" for="residenza">Comune di residenza: </label>
+        <select name="residenza" [(ngModel)]="utente.comuneResidenzaID" id="residenza" required>
+          <option *ngFor="let c of comuni$ | async" [value]="c.istat"> {{c.nome}} </option>
+        </select>
       </div>
+      <div class="form-group">
+        <label class="control-label" for="dipendente">Scegli il tuo comune di lavoro: </label>
+        <select name="dipendente" [(ngModel)]="utente.comuneDipendenteID" id="dipendente" required>
+          <option *ngFor="let c of comuni$ | async" [value]="c.istat"> {{c.nome}} </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="cf">Inserisci il tuo codice fiscale: </label>
+        <input class="form-control" type="text" id="cf" 
+          [(ngModel)]="cf" name="cf" placeholder="Codice Fiscale">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="telefono">Inserisci il tuo numero di telefono: </label>
+        <input class="form-control" type="text" id="telefono" 
+          [(ngModel)]="telefono" name="telefono" placeholder="Numero di telefono">
+      </div>
+      <div class="form-group row justify-content-center">
+        <div class="submit">
+          <button type="submit" class="btn btn-success" [disabled]="!googleMunicipalityForm.form.valid || sendingGoogle">Conferma</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-template #normalForm>
+    <div *ngIf="error_message != ''">
+      <div class="alert alert-danger" role="alert"> {{error_message}} </div>
     </div>
-  </form>
+    <form class="form-horizontal" (ngSubmit)="accedi()" #login="ngForm">
+      <h1>Benvenuto!</h1>
+      <h2>Accedi con le credenziali</h2>
+      <div class="form-group">
+        <label class="control-label" for="email">email: </label>
+        <input class="form-control" type="email" id="email" required 
+          [(ngModel)]="email" name="email" placeholder="Email Address">
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="password">password: </label>
+        <input class="form-control" type="password" id="password" required 
+          [(ngModel)]="password" name="password" placeholder="password">
+      </div>
+      <div class="form-group row justify-content-center">
+        <div class="submit">
+          <button type="submit" class="btn btn-success" [disabled]="!login.form.valid || sending">Conferma</button>
+        </div>
+      </div>
+      
+    </form>
+    
+    <h2>Altrimenti accedi con le tue credenziali Google</h2>
+    <div class="mx-auto mb-2">
+      <button class="btn btn-success" type="button" (click)="googleLogin()">Accedi</button>
+    </div>
+    
+    <h2>Non sei ancora registrato?</h2>
+    <div class="mx-auto">
+      <button class="btn btn-primary" (click)="registrati()">REGISTRATI</button>
+    </div>
+  </ng-template>
   
-  <h2>Altrimenti accedi con le seguenti piattaforme</h2>
-  <div class="mx-auto mb-2">
-    <button class="btn btn-success mr-1" type="button">Google</button>
-    <button class="btn facebook" type="button">Facebook</button>
-  </div>
-  
-  <h2>Non sei ancora registrato?</h2>
-  <div class="mx-auto">
-    <button class="btn btn-primary" (click)="registrati()">REGISTRATI</button>
-  </div>
 </div>

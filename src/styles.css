@@ -2,3 +2,50 @@
 body{
   background-color: white;
 }
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+h1, h2{
+  text-align: center;
+}
+
+.btn{
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.big_card{
+  background-color: gainsboro;
+  max-width: 70%;
+  margin: auto;
+  border-color: dodgerblue;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 12px;
+}
+
+.small_card{
+  background-color: gainsboro;
+  border-color: dodgerblue;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 6px;
+  max-width: 500px;
+}
+
+.erroreAccesso{
+  background-color: red;
+  color: azure;
+  margin-top: 0px;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  padding-left: 7px;
+}

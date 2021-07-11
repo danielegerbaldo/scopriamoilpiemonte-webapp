@@ -23,6 +23,14 @@ export class MunicipalityService {
       );
   }
 
+  getByName(name : string){
+    var url = this.baseUrl + "/info-comune/getByName/" + name;
+    return this.http.get(url, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('comune per nome', []))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   

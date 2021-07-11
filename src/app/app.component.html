@@ -1,5 +1,5 @@
 <div>
-  <app-header></app-header>
+  <app-header (pageEmitter)="riceviPagina($event)"></app-header>
 </div>
 <div>
   <app-navbar 
@@ -22,6 +22,9 @@
       </div>
       <div *ngSwitchCase="Pagina.profilo">
         <app-profilo></app-profilo>
+      </div>
+      <div *ngSwitchCase="Pagina.dipendenticomunali">
+        <app-dipendenti></app-dipendenti>
       </div>
       <div *ngSwitchDefault>
         <h2> In costruzione </h2>

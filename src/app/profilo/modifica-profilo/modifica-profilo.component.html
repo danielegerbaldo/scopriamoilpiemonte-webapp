@@ -1,0 +1,50 @@
+<form class="form-horizontal mt-3 p-3 big_card" (ngSubmit)="inoltraModifiche()" #modifica="ngForm">
+  <div class="form-group">
+    <label class="control-label" for="nome">Nome: </label>
+    <input class="form-control" type="text" id="nome" 
+      [(ngModel)]="utente.nome" name="nome" placeholder="utente.nome">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="cognome">Cognome: </label>
+    <input class="form-control" type="text" id="cognome" 
+      [(ngModel)]="utente.cognome" name="nome" placeholder="utente.cognome">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="cf">Codice fiscale: </label>
+    <input class="form-control" type="text" id="cf" 
+      [(ngModel)]="cf" name="cf" placeholder="cf">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="telefono">Numero di telefono: </label>
+    <input class="form-control" type="text" id="telefono" 
+      [(ngModel)]="telefono" name="telefono" placeholder="telefono">
+  </div>
+  <div *ngIf="comuni$ !== null">
+    <div class="form-group">
+      <label class="control-label" for="residenza">Comune di residenza: </label>
+      <select name="residenza" [(ngModel)]="utente.comuneResidenzaID" id="residenza">
+        <option *ngFor="let c of comuni$ | async" [value]="c.istat"> {{c.nome}} </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="dipendente">Comune di lavoro: </label>
+      <select name="dipendente" [(ngModel)]="utente.comuneDipendenteID" id="dipendente">
+        <option *ngFor="let c of comuni$ | async" [value]="c.istat"> {{c.nome}} </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="email">Email: </label>
+    <input class="form-control" type="email" id="email" 
+      [(ngModel)]="email" name="email" placeholder="email">
+  </div>
+  <div class="form-group row justify-content-center">
+    <div class="submit">
+      <button type="submit" class="btn btn-success" [disabled]="!modifica.form.valid || submitting">Invia</button>
+    </div>
+    <div>
+      <button class="btn btn-danger ml-2" (click)="goBack()">Annulla</button>
+    </div>
+  </div>
+
+</form>
