@@ -13,15 +13,16 @@ body{
 
 h1, h2{
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 header{
-  background-color: gainsboro;
+  background-color: #006cb4;
   border-bottom: 2px solid black;
 }
 
 footer{
-  background-color: gainsboro;
+  background-color: #006cb4;
   border-top: 2px solid black;
   text-align: center;
   box-shadow: 0 50vh 0 50vh gainsboro;
@@ -33,7 +34,7 @@ footer{
 }
 
 .big_card{
-  background-color: gainsboro;
+  background-color: rgba(34,151,252,0.0784313725490196);
   max-width: 70%;
   margin: auto;
   border-color: dodgerblue;
@@ -43,7 +44,7 @@ footer{
 }
 
 .small_card{
-  background-color: gainsboro;
+  background-color: rgba(34,151,252,0.0784313725490196);
   border-color: dodgerblue;
   border-width: 2px;
   border-style: solid;

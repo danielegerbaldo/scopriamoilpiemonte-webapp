@@ -1,5 +1,5 @@
 nav{
-  background-color: grey;
+  background-color: #232f3e;
   border-width: 2px;
   border-color: black;
   border-style: solid;
@@ -19,6 +19,6 @@ li{
 }
 
 li:hover{
-  background-color: #d3041c;
+  background-color: #232fff;
 }
 .m_title:first-letter {text-transform: uppercase}
