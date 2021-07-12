@@ -19,7 +19,7 @@ export class UserService {
     "userID": -1
   }
 
-  private baseUrl = "http://localhost/api/v1/";
+  private baseUrl = "http://93-41-149-178.ip82.fastwebnet.it:30193/api/v1/";
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

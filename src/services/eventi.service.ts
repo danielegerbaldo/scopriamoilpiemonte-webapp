@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class EventiService {
 
-  private baseUrl = "http://localhost/api/v1/evento";
+  private baseUrl = `http://93-41-149-178.ip82.fastwebnet.it:30193/api/v1/evento`;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -17,7 +17,7 @@ export class EventiService {
   constructor(private http: HttpClient) { }
 
   getEventi(): Observable<Evento[]> {
-    return this.http.get<Evento[]>("http://localhost/api/v1/public/evento-composed/getAllEvent")
+    return this.http.get<Evento[]>("http://93-41-149-178.ip82.fastwebnet.it:30193/api/v1/public/evento-composed/getAllEvent")
       .pipe(
         catchError(this.handleError<Evento[]>('getEventi', []))
       );

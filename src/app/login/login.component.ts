@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
   }
 
   googleLogin(){
-    const url = 'http://localhost/oauth2/authorization/google';
+    const url = 'http://93-41-149-178.ip82.fastwebnet.it:30193/oauth2/authorization/google';
     var windowHandle = this.createWindow(url, "Login");
     var loopCount = 10000;
     var intervalLength = 100;
