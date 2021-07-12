@@ -1,8 +1,9 @@
 nav{
-  background-color: dimgrey;
+  background-color: grey;
   border-width: 2px;
   border-color: black;
   border-style: solid;
+  border-top: none;
 }
 
 nav *{

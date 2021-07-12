@@ -15,6 +15,18 @@ h1, h2{
   text-align: center;
 }
 
+header{
+  background-color: gainsboro;
+  border-bottom: 2px solid black;
+}
+
+footer{
+  background-color: gainsboro;
+  border-top: 2px solid black;
+  text-align: center;
+  box-shadow: 0 50vh 0 50vh gainsboro;
+}
+
 .btn{
   font-weight: bold;
   border-radius: 8px;
